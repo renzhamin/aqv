@@ -1,5 +1,6 @@
 import express from "express"
 import { get_cities_by_aqi } from "../data/helpers.js"
+import { get_city_info } from "../data/helpers.js"
 
 const router = express.Router()
 
@@ -20,9 +21,16 @@ router.use("/rankings", async (req, res) => {
     }
 })
 
-router.use("/city/:cityname", (req, res) => {
+router.use("/city/:cityname", async(req, res) => {
     const { cityname } = req.params
-    res.status(200).json({ msg: cityname })
+    try{
+        const data = await get_city_info(cityname)
+        return res.status(200).json(data)
+        //return res.status(200).json({ msg: cityname })
+    }catch{
+        return res.status(500)
+    }
+    
 })
 
 router.use("/api", router)

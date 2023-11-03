@@ -1,6 +1,30 @@
 import { cached_data } from "./cache.js"
+import "dotenv/config"
+
+const apiKey = process.env.API_KEY;
 
 const ext_api = "https://website-api.airvisual.com/v1/countries/rankings?"
+
+const aqi_api = "https://api.weatherbit.io/v2.0/current/airquality?city={{city}}&key=" + apiKey;
+
+export async function get_city_info(cityname) {
+    const city_info = cached_data.get(cityname)
+    if (city_info) return city_info
+    
+    const url = aqi_api
+        .replace('{{city}}', cityname)
+
+    let data = await fetch(url)
+
+    data = await data.json()
+
+    console.log(data.data)
+
+    cached_data.set(cityname, data)
+
+    return data
+
+}
 
 export async function get_cities_by_aqi(get_cleanest = true) {
     let sortOrder = "asc"
@@ -65,3 +89,7 @@ export async function get_cities_by_aqi(get_cleanest = true) {
 
     return res
 }
+
+
+
+
