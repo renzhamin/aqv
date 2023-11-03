@@ -3,11 +3,11 @@
         height: 5vw;
         display: flex;
         background-color: white;
+        background-color: ;
         width: 100%;
         color:black;
         position: fixed;
         z-index: 10000;
-        /* box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3); */
     }
     .logoBar{
         width: 50%;
@@ -39,7 +39,7 @@
         justify-content: space-between;
     }
     .navSubMenu{
-        width: 56%;
+        width: 70%;
         display: flex;
         justify-content: space-between;
         padding-right: 2%;

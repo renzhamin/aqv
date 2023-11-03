@@ -53,7 +53,7 @@ const MapsComponent = () => {
 
   return (
     <>
-        <div className={styles.mapContaner}>
+        <div className={styles.mapContaner} id="map">
           <p className={styles.title}>Explore your Air Quality</p>
             <div ref={mapContainer} style={{ height: '30vw', width: '90%' , margin: 'auto'}} />
         </div>

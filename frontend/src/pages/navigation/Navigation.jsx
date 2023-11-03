@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './Navigation.module.css'
 import './Navigation.css'
 import {BsFillPlayCircleFill} from 'react-icons/bs';
 import {ImCross} from 'react-icons/im';
@@ -38,6 +37,7 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
     var count=0;
@@ -84,16 +84,15 @@ const Navigation = () => {
             <div className='navMain'>
                 <div className='navMenu'>
                   <div className="my-auto navSubMenu">
-                      <a href="/" className='navMenuPageLinks'>Home</a>
-                      <a href="#features" className='navMenuPageLinks'>Feature</a>
-                      <a href="#pricing" className='navMenuPageLinks'>Pricing</a>
-                      <a href="#pricing" className='navMenuPageLinks'>Testimonials</a>
-                      <a href="#faq" className='navMenuPageLinks'>FAQ</a>
+                      <Link href="/" className='navMenuPageLinks'>Home</Link>
+                      <a href="#map" className='navMenuPageLinks'>Map</a>
+                      <a href="#worstCities" className='navMenuPageLinks'>Worst Cities</a>
+                      <a href="#bestCities" className='navMenuPageLinks'>Best Cities</a>
                       <a href="#contacts" className='navMenuPageLinks'>Contact</a>
                     
                   </div>
                 </div> 
-                <div className={styles.navExtra} onClick={()=> respNav()}></div>
+                <div className='navExtra' onClick={()=> respNav()}></div>
             </div>
         </div>
     </>
