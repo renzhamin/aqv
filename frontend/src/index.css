@@ -1,15 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
-*{
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-html{
+html {
   scroll-behavior: smooth;
 }
+
+.colPurple {
+  background-color: rgb(160, 106, 123);
+}
+
+.colPink {
+  background-color: rgb(160, 112, 182);
+}
+
+.colRed {
+  background-color: rgb(246, 94, 95);
+}
+
+.colOrange {
+  background-color: rgb(249, 144, 73);
+}
+
+.colYellow {
+  background-color: rgb(250, 207, 57);
+}
+
+.colGreen {
+  background-color: rgb(156, 216, 78);
+}
+
+.colBlue {
+  background-color: rgb(96, 172, 203);
+}
+
+.marker {
+  height: 1vw;
+  width: 1vw;
+  border-radius: 50%;
+}
+
+.aqiValue {
+  width: 5vw;
+  color: white;
+  text-align: center;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  border-radius: 0.3vw;
+}
+
 /* @layer base {
   :root {
     --background: 0 0% 100%;

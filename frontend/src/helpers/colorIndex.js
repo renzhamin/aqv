@@ -2,16 +2,16 @@ import styles from "@/pages/topTen/TopTen.module.css";
 
 export const colorIndex = (aqi_score) => {
   if (aqi_score <= 50) {
-    return styles.colGreen;
+    return "colGreen";
   } else if (aqi_score <= 100) {
-    return styles.colYellow;
+    return "colYellow";
   } else if (aqi_score <= 150) {
-    return styles.colOrange;
+    return "colOrange";
   } else if (aqi_score <= 200) {
-    return styles.colRed;
+    return "colRed";
   } else if (aqi_score <= 300) {
-    return styles.colPurple;
+    return "colPurple";
   } else {
-    return styles.colPink;
+    return "colPink";
   }
 };

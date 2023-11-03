@@ -1,65 +1,53 @@
-import React, { useRef, useEffect } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import styles from './MapsCompopnent.module.css'
-import Navigation from '../navigation/Navigation';
+import { get_cities_by_aqi } from "@/fetch/rankings";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { useEffect, useRef } from "react";
+import styles from "./MapsCompopnent.module.css";
+import { colorIndex } from "@/helpers/colorIndex";
 
 const MapsComponent = () => {
   const mapContainer = useRef(null);
   const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
-  const cities = [
-    { name: 'City 1', coordinates: [90.401450, 23.911271] }, // Replace with actual coordinates
-    { name: 'City 2', coordinates: [30,40] }, // Replace with actual coordinates
-    // Add more cities as needed
-  ];
-
   useEffect(() => {
-    mapboxgl.accessToken = mapboxToken;
-    const map = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [90.401450, 23.911271], // [longitude, latitude]
-      zoom: 5.7
-    });
-
-    // Add markers for each city
-    cities.forEach(city => {
-      const el = document.createElement('div');
-      el.className = styles.marker;
-
-      new mapboxgl.Marker(el)
-        .setLngLat(city.coordinates)
-        .setPopup(new mapboxgl.Popup().setText(city.name))
-        .addTo(map);
-    });
-
-    cities.forEach(city => {
-        // Create a marker element
-        const markerElement = document.createElement('div');
-        markerElement.className = 'marker';
-  
-        // Create a marker on the map
-        const marker = new mapboxgl.Marker(markerElement)
-          .setLngLat(city.coordinates)
-          // .setPopup(new mapboxgl.Popup().setText(city.name)) // Set popup text to city name
-          .setPopup(new mapboxgl.Popup().setHTML(`<h3>${city.name}</h3>`)) // Set popup text to city name
-          .addTo(map);
+    get_cities_by_aqi(false).then((worst) => {
+      mapboxgl.accessToken = mapboxToken;
+      const map = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [90.40145, 23.911271], // [longitude, latitude]
+        zoom: 5.7,
       });
 
+      worst.forEach((item) => {
+        if (item.lat && item.lng) {
+          const lat = parseFloat(item.lat);
+          const lng = parseFloat(item.lng);
+          const el = document.createElement("div");
+          el.className = colorIndex(item.aqi) + " marker";
 
-    return () => map.remove(); // Cleanup on unmount
+          new mapboxgl.Marker(el)
+            .setLngLat([lng, lat])
+            .setPopup(
+              new mapboxgl.Popup().setText(item.city + ", aqi:" + item.aqi)
+            )
+            .addTo(map);
+        }
+      });
+    });
   }, []);
 
   return (
     <>
-        <div className={styles.mapContaner} id= "map">
-          <p className={styles.title}>Explore your Air Quality</p>
-            <div ref={mapContainer} style={{ height: '30vw', width: '90%' , margin: 'auto'}} />
-        </div>
+      <div className={styles.mapContaner} id="map">
+        <p className={styles.title}>Explore your Air Quality</p>
+        <div
+          ref={mapContainer}
+          style={{ height: "30vw", width: "90%", margin: "auto" }}
+        />
+      </div>
     </>
-  
   );
 };
 
-export default MapsComponent
+export default MapsComponent;
