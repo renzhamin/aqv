@@ -1,0 +1,32 @@
+@media screen and (min-width: 992px) {
+    .airQuality{
+        width: 80%;
+        margin: auto;
+        box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
+        padding:3vw 2vw;
+    }
+    .title{
+        font-size: 1vw;
+        color: blue;
+        margin-bottom: 0.5vw;
+    }
+    .tableTitle{
+        font-size: 1.3vw;
+        margin-bottom: 2vw;
+    }
+}
+@media screen and (max-width: 991px) {
+    .airQuality{
+        width: 90%;
+        margin: auto;
+    }
+    .title{
+        font-size: 3vw;
+        color: blue;
+        margin-bottom: 0.5vw;
+    }
+    .tableTitle{
+        font-size: 5vw;
+        margin-bottom: 2vw;
+    }
+}

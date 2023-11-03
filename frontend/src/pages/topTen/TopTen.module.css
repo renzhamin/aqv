@@ -1,0 +1,66 @@
+.tableHeader{
+    background-color:  rgba(0,0,0,0.1);
+}
+.colPurple{
+    background-color: rgb(160,106,123);
+    width: 5vw;
+    color: white;
+    text-align: center;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-radius: 0.3vw;
+}
+.colPink{
+    background-color: rgb(160,112,182);
+    width: 5vw;
+    color: white;
+    text-align: center;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-radius: 0.3vw;
+}
+.colRed{
+    background-color: rgb(246,94,95);
+    width: 5vw;
+    color: white;
+    text-align: center;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-radius: 0.3vw;
+}
+.colOrange{
+    background-color: rgb(249,144,73);
+    width: 5vw;
+    color: white;
+    text-align: center;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-radius: 0.3vw;
+}
+.colYellow{
+    background-color: rgb(250,207,57);
+    width: 5vw;
+    color: white;
+    text-align: center;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-radius: 0.3vw;
+}
+.colGreen{
+    background-color: rgb(156,216,78);
+    width: 5vw;
+    color: white;
+    text-align: center;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-radius: 0.3vw;
+}
+.colBlue{
+    background-color: rgb(96,172,203);
+    width: 5vw;
+    color: white;
+    text-align: center;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-radius: 0.3vw;
+}
