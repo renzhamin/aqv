@@ -64,9 +64,8 @@ const TopTen = ({ airQualityData }) => {
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader className={styles.tableHeader}>
           <TableRow>
-            <TableHead className="w-[5vw]">#</TableHead>
+            <TableHead>#</TableHead>
             <TableHead>CITY</TableHead>
-            <TableHead>FLAG</TableHead>
             <TableHead>STATE</TableHead>
             <TableHead>AQI SCORE</TableHead>
           </TableRow>
@@ -75,10 +74,12 @@ const TopTen = ({ airQualityData }) => {
         <TableBody>
           {airQualityData.map((item, index) => (
             <TableRow key={item.city}>
-              <TableCell className="font-medium">{index + 1}</TableCell>
-              <TableCell>{item.city}</TableCell>
+              <TableCell className="font-bold text-xl">{index + 1}</TableCell>
               <TableCell>
-                <img src={item.flagURL} className={styles.flagImg} />
+                <div className="float-left mr-4">
+                  <img src={item.flagURL} width={50} />
+                </div>
+                <p>{item.city}</p>
               </TableCell>
               <TableCell>{item.state}</TableCell>
               {colColor(item.aqi)}
