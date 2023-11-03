@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter , HashRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
 
 import HomePage from "./pages/homepage/HomePage";
 import CityDescription from "./pages/cityDescription/CityDescription";
@@ -34,7 +34,7 @@ function App() {
         <HashRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/citydescription" element={<CityDescription />} />
+            <Route path="/city/:cityname" element={<CityDescription />} />
           </Routes>
         </HashRouter>
       </AppContext.Provider>
