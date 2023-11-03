@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./AirQuality.module.css";
 import TopTen from "../topTen/TopTen";
-import { get_cities_by_aqi } from "@/fetch/rankings";
+import { AppContext } from "@/App";
 
 const AirQuality = () => {
-  const [worst, setWorst] = useState([]);
-  const [best, setBest] = useState([]);
-  useEffect(() => {
-    get_cities_by_aqi(false).then((data) => {
-      setWorst(data.slice(0, 10));
-    });
-    get_cities_by_aqi(true).then((data) => {
-      setBest(data.slice(0, 10));
-    });
-  }, []);
+  const { worst, best } = useContext(AppContext);
 
   return (
     <div>
