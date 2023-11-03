@@ -22,16 +22,15 @@ router.use("/rankings", async (req, res) => {
     }
 })
 
-router.use("/city/:cityname", async(req, res) => {
+router.use("/city/:cityname", async (req, res) => {
     const { cityname } = req.params
-    try{
+    try {
         const data = await get_city_info(cityname)
         return res.status(200).json(data)
         //return res.status(200).json({ msg: cityname })
-    }catch{
+    } catch {
         return res.status(500)
     }
-    
 })
 
 router.use("/country/:country_code", async (req, res) => {
@@ -39,7 +38,7 @@ router.use("/country/:country_code", async (req, res) => {
     try {
         const data = await get_country_info(country_code)
         return res.status(200).json(data)
-       // return res.sendStatus(200)
+        // return res.sendStatus(200)
     } catch {
         return res.status(500)
     }
