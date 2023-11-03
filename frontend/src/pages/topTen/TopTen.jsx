@@ -43,8 +43,9 @@ const TopTen = ({airQualityData}) => {
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader className={styles.tableHeader}>
             <TableRow>
-            <TableHead className="w-[100px]">#</TableHead>
+            <TableHead className="w-[5vw]">#</TableHead>
             <TableHead>COUNTRY</TableHead>
+            <TableHead>FLAG</TableHead>
             <TableHead>POPULATION</TableHead>
             <TableHead >AQI SCORE</TableHead>
             </TableRow>
@@ -55,6 +56,7 @@ const TopTen = ({airQualityData}) => {
             <TableRow key={country.country_name}>
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>{country.country_name}</TableCell>
+                <TableCell><img src="https://media.istockphoto.com/id/1061013668/vector/vector-flag-of-the-peoples-republic-of-bangladesh-proportion-3-5-the-national-flag-of.jpg?s=612x612&w=0&k=20&c=2UzlTX9EIPrLJJ9kHcr-VOXvM6FWNWsi3uZmsocshBk=" className={styles.flagImg}/></TableCell>
                 <TableCell>{country.population}</TableCell>
                 {colColor(country.aqi_score)}
                 {/* <TableCell>{country.aqi_score}</TableCell> */}
