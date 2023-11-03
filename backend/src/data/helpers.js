@@ -31,8 +31,6 @@ export async function get_city_info(cityname) {
 
     data = await data.json()
 
-    console.log(data.data)
-
     cached_data.set(cityname, data)
 
     return data
