@@ -73,9 +73,80 @@ const CityDescription = () => {
                 </TableCell>
                 <TableCell>229µg/m³</TableCell>
               </TableRow>
+
+              <TableRow>
+                <TableCell>PM10</TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>229µg/m³</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Ozone (O3) </TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>229µg/m³</TableCell>
+              </TableRow>
             </TableBody>
 
         </Table>
+        <br/>
+        <h2>What is the socio economic factor in Bangladesh?</h2>
+        <Table className={styles.table2}>
+          <TableHeader>
+            <TableRow className={styles.tableHeader}>
+              <TableHead>Indicator</TableHead>
+              <TableHead></TableHead>
+              <TableHead>Value</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+              <TableRow>
+                <TableCell>Total GDP</TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>1234</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>GDP per capita</TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>1234</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>GDP growth</TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>1234</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>Total Population</TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>1234</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>Population Growth</TableCell>
+                <TableCell>
+
+                </TableCell>
+                <TableCell>1234</TableCell>
+              </TableRow>
+
+
+            </TableBody>
+
+        </Table>
+
       </div>
     </div>
   )
