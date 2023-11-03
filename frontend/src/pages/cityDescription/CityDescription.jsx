@@ -15,18 +15,15 @@ import {
 
 const CityDescription = () => {
   const [city, setCity] = React.useState(null);
-  const [country, setCountry] = React.useState(null);
+  
   useEffect(() => {
     get_city_info("Dhaka").then((data) => {
       setCity(data);
     });
-    get_country_info(city?.country_code).then((data) => {
-      setCountry(data); 
-    }); 
   }, []); 
-  console.log(city?.country_code);
-  console.log(city?.data[0].aqi);
-  console.log(country)
+
+  console.log(city);
+
   return ( 
     <div className={styles.cityDescription}>
       <Navigation/>
@@ -121,7 +118,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>{country?.gdp}</TableCell>
+                <TableCell>{city?.gdp}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -129,7 +126,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>{country?.gdpPerCapita}</TableCell>
+                <TableCell>{city?.gdpPerCapita}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -137,7 +134,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>{country?.gdpGrowth}</TableCell>
+                <TableCell>{city?.gdpGrowth}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -145,7 +142,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>{country?.population}</TableCell>
+                <TableCell>{city?.population}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -153,7 +150,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>{country?.populationGrowth}</TableCell>
+                <TableCell>{city?.populationGrowth}</TableCell>
               </TableRow>
 
 
