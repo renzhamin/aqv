@@ -76,8 +76,14 @@ function getValue(data) {
 }
 
 function get_lat_lng() {
-    const s = fs.readFileSync("./src/data/cord", "utf-8")
+    let s = ""
+    try {
+        s = fs.readFileSync("./src/data/cord", "utf-8")
+    } catch {
+        s = fs.readFileSync("backend/src/data/cord", "utf-8")
+    }
     const city_cord = new Map()
+    if (!s) return city_cord
     const lines = s.split("\n")
     lines.forEach((line) => {
         const elems = line.split(",")

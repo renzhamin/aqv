@@ -2,6 +2,11 @@ import express from "express"
 import cors from "cors"
 import router from "./routes/index.js"
 import "dotenv/config"
+import path from "path"
+import { fileURLToPath } from "url"
+const __filename = fileURLToPath(import.meta.url)
+
+const __dirname = path.dirname(__filename)
 
 import { rateLimit } from "express-rate-limit"
 const limiter = rateLimit({
@@ -24,6 +29,8 @@ app.use(
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+app.use(express.static(path.join(__dirname, "build")))
 
 app.use(router)
 

@@ -1,0 +1,9 @@
+{
+    "name": "live-air-quality",
+    "version": "1.0.0",
+    "main": "backend/src/index.js",
+    "scripts": {
+        "start": "node backend/src/index.js",
+        "build": "bash ./build.sh"
+    }
+}
