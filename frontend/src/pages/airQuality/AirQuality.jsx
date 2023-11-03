@@ -11,11 +11,15 @@ const AirQuality = () => {
       <div className={[styles.airQuality, "elevated-2xl"].join(" ")}>
         <p className={styles.title}>2022 AQI COUNTRY RANKING</p>
 
-        <p className={styles.tableTitle} id="worstCities">Top 10 polluted cities</p>
-        <TopTen airQualityData={worst} />
+        <p className={styles.tableTitle} id="worstCities">
+          Top 10 polluted cities
+        </p>
+        <TopTen airQualityData={worst.slice(0, 10)} />
 
-        <p className={[`${styles.tableTitle} mt-20`]} id="bestCities">Top 10 cleanest cities</p>
-        <TopTen airQualityData={best} />
+        <p className={[`${styles.tableTitle} mt-20`]} id="bestCities">
+          Top 10 cleanest cities
+        </p>
+        <TopTen airQualityData={best.slice(0, 10)} />
       </div>
     </div>
   );
