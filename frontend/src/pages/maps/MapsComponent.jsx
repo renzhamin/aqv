@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import styles from './MapsCompopnent.module.css'
+import Navigation from '../navigation/Navigation';
 
 const MapsComponent = () => {
   const mapContainer = useRef(null);
@@ -19,7 +20,7 @@ const MapsComponent = () => {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [90.401450, 23.911271], // [longitude, latitude]
-      zoom: 10
+      zoom: 5.7
     });
 
     // Add markers for each city
@@ -53,7 +54,8 @@ const MapsComponent = () => {
   return (
     <>
         <div className={styles.mapContaner}>
-            <div ref={mapContainer} style={{ height: '30vw', width: '100%' }} />
+          <p className={styles.title}>Explore your Air Quality</p>
+            <div ref={mapContainer} style={{ height: '30vw', width: '90%' , margin: 'auto'}} />
         </div>
     </>
   
