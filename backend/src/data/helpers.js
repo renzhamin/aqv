@@ -40,7 +40,7 @@ export async function get_city_info(cityname) {
 
 export async function get_country_info(country_code) {
     let countryInfo = cached_data.get(country_code)
-    if (countryInfo) return [countryInfo]
+    if (countryInfo) return countryInfo
 
     const gdp = await fetchData(gdp_api, country_code)
     const gdpPerCapita = await fetchData(gdp_per_capita_api, country_code)
@@ -61,7 +61,7 @@ export async function get_country_info(country_code) {
 
     cached_data.set(country_code, countryInfo)
 
-    return [countryInfo]
+    return countryInfo
 }
 
 async function fetchData(api, countryCode) {

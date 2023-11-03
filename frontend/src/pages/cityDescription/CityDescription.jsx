@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './CityDescription.module.css'
 import Navigation from '../navigation/Navigation'
+import { get_city_info,get_country_info } from '@/fetch/rankings';
 
 import {
   Table,
@@ -13,19 +14,32 @@ import {
 
 
 const CityDescription = () => {
-  return (
+  const [city, setCity] = React.useState(null);
+  const [country, setCountry] = React.useState(null);
+  useEffect(() => {
+    get_city_info("Dhaka").then((data) => {
+      setCity(data);
+    });
+    get_country_info(city?.country_code).then((data) => {
+      setCountry(data); 
+    }); 
+  }, []); 
+  console.log(city?.country_code);
+  console.log(city?.data[0].aqi);
+  console.log(country)
+  return ( 
     <div className={styles.cityDescription}>
       <Navigation/>
       <h2 className={styles.topSpace}></h2>
       <div className={styles.topBox}>
         <div className={styles.titleBox}>
-          <h2>Air quality in Delhi</h2>
-          <p>Air quality index (AQI) and PM2.5 air pollution in Delhi</p>
+          <h2>Air quality in {city?.city_name}</h2>
+          <p>Air quality index (AQI) and PM2.5 air pollution in {city?.city_name}</p>
         </div>
         <div className={styles.aqiColorBox}>
           <div className={styles.aqiScoreBox}>
-            <p>US AQI</p>
-            <h2>346</h2>
+            <p> US AQI</p>
+            <h2>{city?.data[0].aqi}</h2>
           </div>
           <div className={styles.aqiTextBox}>
             <p>LIve AQI INDEX</p>
@@ -36,7 +50,7 @@ const CityDescription = () => {
       
       <div className={styles.tableBox}>
         <p>OVERVIEW</p>
-        <h2>What is the current air quality in Delhi?</h2>
+        <h2>What is the current air quality in {city?.city_name}?</h2>
 
         <Table className={styles.table1}>
           <TableHeader>
@@ -50,8 +64,8 @@ const CityDescription = () => {
           <TableBody>
             <TableRow>
               <TableCell>Hazardous</TableCell>
-              <TableCell>346 US AQI</TableCell>
-              <TableCell>PM10</TableCell>
+              <TableCell>{city?.data[0].aqi} US AQI</TableCell>
+              <TableCell>PM2.5</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -71,7 +85,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>229µg/m³</TableCell>
+                <TableCell>{city?.data[0].pm25} µg/m³</TableCell>
               </TableRow>
 
               <TableRow>
@@ -79,14 +93,14 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>229µg/m³</TableCell>
+                <TableCell>{city?.data[0].pm10} µg/m³</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Ozone (O3) </TableCell>
                 <TableCell>
 
                 </TableCell>
-                <TableCell>229µg/m³</TableCell>
+                <TableCell>{city?.data[0].o3} µg/m³</TableCell>
               </TableRow>
             </TableBody>
 
@@ -107,7 +121,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>1234</TableCell>
+                <TableCell>{country?.gdp}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -115,7 +129,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>1234</TableCell>
+                <TableCell>{country?.gdpPerCapita}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -123,7 +137,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>1234</TableCell>
+                <TableCell>{country?.gdpGrowth}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -131,7 +145,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>1234</TableCell>
+                <TableCell>{country?.population}</TableCell>
               </TableRow>
 
               <TableRow>
@@ -139,7 +153,7 @@ const CityDescription = () => {
                 <TableCell>
 
                 </TableCell>
-                <TableCell>1234</TableCell>
+                <TableCell>{country?.populationGrowth}</TableCell>
               </TableRow>
 
 
