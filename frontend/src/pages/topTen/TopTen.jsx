@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { colorIndex } from "@/helpers/colorIndex";
 
 const TopTen = ({ airQualityData }) => {
   const colColor = (aqi_score) => {
@@ -82,7 +83,11 @@ const TopTen = ({ airQualityData }) => {
                 <p>{item.city}</p>
               </TableCell>
               <TableCell>{item.state}</TableCell>
-              {colColor(item.aqi)}
+              {/* {colColor(item.aqi)} */}
+              <TableCell>
+                <p className={colorIndex(item.aqi)}>{item.aqi}</p>
+              </TableCell>
+
               {/* <TableCell>{country.aqi_score}</TableCell> */}
             </TableRow>
           ))}
