@@ -16,3 +16,8 @@ export async function get_country_info(country_code) {
   let data = await axios.get("/country/" + country_code);
   return data.data;
 }
+
+export async function get_country_info_by_name(country) {
+  let data = await axios.get("/country_code/" + country);
+  return data;
+}

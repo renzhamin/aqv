@@ -4,6 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef } from "react";
 import styles from "./MapsCompopnent.module.css";
 import { colorIndex } from "@/helpers/colorIndex";
+import { SearchBar } from "@/components/search";
 
 const MapsComponent = () => {
   const mapContainer = useRef(null);

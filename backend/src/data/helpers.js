@@ -1,4 +1,5 @@
 import fs from "fs"
+import iso3166 from "iso-3166-1"
 import { cached_data } from "./cache.js"
 import "dotenv/config"
 
@@ -167,4 +168,9 @@ export async function get_cities_by_aqi(get_cleanest = true) {
     )
 
     return res
+}
+
+export const get_country_code = (countryName) => {
+    const countryInfo = iso3166.whereCountry(countryName)
+    return countryInfo ? countryInfo.alpha2 : null
 }
