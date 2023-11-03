@@ -1,5 +1,9 @@
+import {Routes, Route, BrowserRouter} from "react-router-dom";
+
+import HomePage from "./pages/homepage/HomePage"
+import CityDescription from "./pages/cityDescription/CityDescription";
+
 import { useEffect, useState } from "react";
-import HomePage from "./pages/homepage/HomePage";
 
 import { createContext } from "react";
 import { get_cities_by_aqi } from "./fetch/rankings";
@@ -26,15 +30,13 @@ function App() {
           best,
         }}
       >
-        <HomePage />
-        {/* <div>
-                <Button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </Button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div> */}
+          <BrowserRouter>
+              <Routes>
+                  <Route path="/" element={<HomePage/>} />
+                  <Route path="/citydescription" element={<CityDescription/>} />
+              </Routes>
+          </BrowserRouter>
+
       </AppContext.Provider>
     </>
   );

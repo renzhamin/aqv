@@ -16,10 +16,10 @@ const Footer = () => {
                             <img src="https://w7.pngwing.com/pngs/993/679/png-transparent-iphone-4s-ios-7-computer-icons-weather-weather-logo-thumbnail.png" className={styles.footerLogo}/>
                         </div>
                         <div className={styles.menu}>
-                            {/* <a href="#home">HOME</a>
-                            <a href="#pricing">PRICE</a>
-                            <a href="#testimonials">TESTIMONIALS</a>
-                            <a href="#pricing">PRICING</a> */}
+                            <Link href="/">HOME</Link>
+                            <a href="#map">MAP</a>
+                            <a href="#worstCities">WORST CITIES</a>
+                            <a href="#bestCities">BEST CITIES</a>
                             
                         </div>
                     </div>

@@ -8,9 +8,9 @@ const HomePage = () => {
   return (
     <div>
         <Navigation/>
-        <MapsComponent/>
-        <AirQuality/>
-        <Footer/>
+       <MapsComponent/>
+         <AirQuality/>
+        <Footer/> 
 
     </div>
   )
