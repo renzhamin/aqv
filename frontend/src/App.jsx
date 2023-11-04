@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { createContext } from "react";
 import { get_cities_by_aqi } from "./fetch/rankings";
+import ChartComp from "./components/barchart/ChartComp";
 
 export const AppContext = createContext();
 
@@ -34,6 +35,7 @@ function App() {
         <HashRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/comp" element={<ChartComp />} />
             <Route path="/city/:cityname" element={<CityDescription />} />
           </Routes>
         </HashRouter>
