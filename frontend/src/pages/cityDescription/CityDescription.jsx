@@ -48,6 +48,8 @@ const CityDescription = () => {
     });
   }, []);
 
+  console.log(city);
+
   return (
     <div className={styles.cityDescription}>
       <Navigation />
@@ -132,7 +134,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
         <br />
-        <h2>What is the socio economic factor in Bangladesh?</h2>
+        <h2>What is the socio economic factor in {city?.countryName}?</h2>
         <Table className={styles.table2}>
           <TableHeader>
             <TableRow className={styles.tableHeader}>
