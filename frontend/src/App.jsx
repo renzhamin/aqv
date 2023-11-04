@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { get_cities_by_aqi } from "./fetch/rankings";
 import ChartComp from "./components/barchart/ChartComp";
+import { ThemeProvider } from "./components/theme-provider";
 
 export const AppContext = createContext();
 
@@ -26,20 +27,22 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider
-        value={{
-          worst,
-          best,
-        }}
-      >
-        <HashRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/comp/:cities" element={<ChartComp />} />
-            <Route path="/city/:cityname" element={<CityDescription />} />
-          </Routes>
-        </HashRouter>
-      </AppContext.Provider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <AppContext.Provider
+          value={{
+            worst,
+            best,
+          }}
+        >
+          <HashRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/comp/:cities" element={<ChartComp />} />
+              <Route path="/city/:cityname" element={<CityDescription />} />
+            </Routes>
+          </HashRouter>
+        </AppContext.Provider>
+      </ThemeProvider>
     </>
   );
 }
