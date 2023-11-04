@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Link as ScrollLink } from 'react-scroll';
 
 import {
   DropdownMenu,
@@ -98,6 +99,9 @@ const Navigation = () => {
               <Link to="/" className="navMenuPageLinks">
                 Home
               </Link>
+              <ScrollLink to="compare" smooth={true} duration={200} className='navMenuPageLinks'>Compare</ScrollLink>
+              <ScrollLink to="aqi" smooth={true} duration={200} className='navMenuPageLinks'>AQI</ScrollLink>
+              <ScrollLink to="score" smooth={true} duration={200} className='navMenuPageLinks'>Socio Score</ScrollLink>
             </div>
           </div>
           <div className="navExtra" onClick={() => respNav()}></div>

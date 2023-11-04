@@ -16,8 +16,11 @@ import { colorIndex } from "@/helpers/colorIndex";
 import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 
 import SearchBar from '../search/search'
+import Loading from "../loading/Loading";
+import Footer from "../footer/Footer";
 
 const CityDescription = () => {
+  const [loading, setLoading] = React.useState(true);
   const [city, setCity] = React.useState(null);
   const [chartdata_aq, setAQ] = useState([]);
   const [chartdata_sc, setSC] = useState([]);
@@ -48,10 +51,17 @@ const CityDescription = () => {
       ];
 
       setSC(tmp);
+      setLoading(false);
     });
   }, []);
 
-  console.log(city);
+  // console.log(city);
+
+  if (loading) {
+    return(
+      <Loading />
+    );
+  }
 
   return (
     <div className={styles.cityDescription}>
@@ -87,14 +97,14 @@ const CityDescription = () => {
           )}
       </div>
 
-      <p>Compare With</p>
+      <p id="compare">Compare With</p>
       <SearchBar city1={city}/>
 
       <div className={styles.tableBox}>
         <p>OVERVIEW</p>
         <h2>What is the current air quality in {city?.city_name}?</h2>
 
-        <Table className={styles.table1}>
+        <Table className={styles.table1} id="aqi">
           <TableHeader>
             <TableRow className={styles.tableHeader}>
               <TableHead>Air pollution level</TableHead>
@@ -112,7 +122,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
 
-        <Table className={styles.table2}>
+        <Table className={styles.table2} >
           <TableHeader>
             <TableRow className={styles.tableHeader}>
               <TableHead>Polutant</TableHead>
@@ -141,7 +151,7 @@ const CityDescription = () => {
         </Table>
         <br />
         <h2>What is the socio economic factor in {city?.countryName}?</h2>
-        <Table className={styles.table2}>
+        <Table className={styles.table3} id="score">
           <TableHeader>
             <TableRow className={styles.tableHeader}>
               <TableHead>Indicator</TableHead>
@@ -182,6 +192,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
       </div>
+      <Footer/>
     </div>
   );
 };
