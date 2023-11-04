@@ -35,7 +35,7 @@ function App() {
         <HashRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/comp" element={<ChartComp />} />
+            <Route path="/comp/:cities" element={<ChartComp />} />
             <Route path="/city/:cityname" element={<CityDescription />} />
           </Routes>
         </HashRouter>

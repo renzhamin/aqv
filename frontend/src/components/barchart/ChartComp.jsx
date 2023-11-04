@@ -1,5 +1,6 @@
 import React from "react";
 import GroupedBarChart from "./GroupedBarChart"; // Import the custom hook
+import { useParams } from "react-router-dom";
 
 const cities = [
   { city_name: "Dhaka", data: { aqi: 100, pm25: 20, pm10: 30, o3: 50 } },
@@ -7,6 +8,10 @@ const cities = [
 ];
 
 function ChartComp() {
+  const {cities} = useParams();
+  console.log(cities);
+
+
   const data = [];
   const aqis = [];
   const pm25s = [];
