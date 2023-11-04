@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import { useParams } from "react-router-dom";
 import { colorIndex } from "@/helpers/colorIndex";
+import { aqiuslegend } from "@/helpers/aqiuslegend";
 import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 
 const CityDescription = () => {
@@ -68,7 +69,8 @@ const CityDescription = () => {
           </div>
           <div className={styles.aqiTextBox}>
             <p>Live AQI INDEX</p>
-            {/* <h2>Hazardous</h2> */}
+
+            {aqiuslegend(city?.data[0].aqi)/* <h2>Hazardous</h2> */}
           </div>
         </div>
       </div>
