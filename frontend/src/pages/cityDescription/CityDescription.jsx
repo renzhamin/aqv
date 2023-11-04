@@ -65,7 +65,7 @@ const CityDescription = () => {
 
   return (
     <div className={styles.cityDescription}>
-      <NavigationSub/>
+      <NavigationSub />
       <h2 className={styles.topSpace}></h2>
       <div className={styles.topBox}>
         <div className={styles.titleBox}>
@@ -97,8 +97,9 @@ const CityDescription = () => {
           )}
       </div>
 
-      <p id="compare">Compare With</p>
-      <SearchBar city1={city}/>
+
+      <p className="mx-auto text-center mt-6" id="compare">Compare With</p>
+      <SearchBar city1={city} />
 
       <div className={styles.tableBox}>
         <p>OVERVIEW</p>

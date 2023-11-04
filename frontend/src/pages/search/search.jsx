@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useContext} from "react";
-import { useNavigate } from 'react-router-dom'; // Import useNavigat
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigat
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
@@ -19,93 +19,68 @@ import {
 
 import { AppContext } from "@/App";
 
+import styles from "./search.module.css";
 
-const frameworks = [
-    {
-      value: "next.js",
-      label: "Next.js",
-    },
-    {
-      value: "sveltekit",
-      label: "SvelteKit",
-    },
-    {
-      value: "nuxt.js",
-      label: "Nuxt.js",
-    },
-    {
-      value: "remix",
-      label: "Remix",
-    },
-    {
-      value: "astro",
-      label: "Astro",
-    },
-  ];
+const search = ({ city1 }) => {
+  const [open, setOpen] = useState(false);
+  const [city, setCity] = useState("");
+  const { best } = useContext(AppContext);
 
-import styles from './search.module.css'
+  const navigate = useNavigate();
 
-const search = ({city1}) => {
-    const [open, setOpen] = useState(false);
-    const [city, setCity] = useState("");
-    const { best } = useContext(AppContext);
-  
-    const navigate = useNavigate();
-    
-    useEffect(() => {
-      console.log(city)
-      if(city == '' || city == null || city ==undefined){}
-      else {
-        console.log("hello"+ city1.city_name, city);
-        navigate(`/comp/${city1.city_name}-${city}`);
-      }
-    }, [city]);
-    
-    return (
-        <div>
-            <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild className="mt-8 ml-[40vw]">
-                <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className="w-[200px] justify-between "
+  useEffect(() => {
+    console.log(city);
+    if (city == "" || city == null || city == undefined) {
+    } else {
+      navigate(`/comp/${city1.city_name}-${city}`);
+    }
+  }, [city]);
+
+  return (
+    <div>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild className="mt-8 ml-[40vw]">
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-[200px] justify-between "
+          >
+            {city
+              ? best.find((item) => item.city === city)?.city
+              : "Select City..."}
+            <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[200px] p-0 bg-white">
+          <Command>
+            <CommandInput placeholder="Search City..." className="h-9" />
+            <CommandEmpty>No Cities found.</CommandEmpty>
+            <CommandGroup className="max-h-64">
+              {best.map((item) => (
+                <CommandItem
+                  key={item.city}
+                  value={item.city}
+                  onSelect={(currentValue) => {
+                    setCity(currentValue === city ? "" : currentValue);
+                    setOpen(false);
+                  }}
                 >
-                    {city
-                    ? best.find((item) => item.city === city)?.city
-                    : "Select City..."}
-                    <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0 bg-white">
-                <Command>
-                    <CommandInput placeholder="Search City..." className="h-9" />
-                    <CommandEmpty>No Cities found.</CommandEmpty>
-                    <CommandGroup className="max-h-64">
-                    {best.map((item) => (
-                        <CommandItem
-                        key={item.city}
-                        value={item.city}
-                        onSelect={(currentValue) => {
-                            setCity(currentValue === city ? "" : currentValue);
-                            setOpen(false);
-                        }}
-                        >
-                        {item.city}
-                        <CheckIcon
-                            className={cn(
-                            "ml-auto h-4 w-4",
-                            city === item.value ? "opacity-100" : "opacity-0"
-                            )}
-                        />
-                        </CommandItem>
-                    ))}
-                    </CommandGroup>
-                </Command>
-                </PopoverContent>
-            </Popover>
-        </div>
-    )
-}
+                  {item.city}
+                  <CheckIcon
+                    className={cn(
+                      "ml-auto h-4 w-4",
+                      city === item.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+};
 
-export default search
+export default search;
