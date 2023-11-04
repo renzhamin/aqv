@@ -41,6 +41,7 @@ export async function get_country_info(country_code) {
     let countryInfo = cached_data.get(country_code)
     if (countryInfo) return countryInfo
 
+    const country = iso3166.whereAlpha2(country_code)
     const gdp = await fetchData(gdp_api, country_code)
     const gdpPerCapita = await fetchData(gdp_per_capita_api, country_code)
     const gdpGrowth = await fetchData(gdp_growth_api, country_code)
@@ -51,6 +52,7 @@ export async function get_country_info(country_code) {
     )
 
     countryInfo = {
+        countryName: country.country,
         gdp: getValue(gdp),
         gdpPerCapita: getValue(gdpPerCapita),
         gdpGrowth: getValue(gdpGrowth),
