@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CityDescription.module.css";
 import Navigation from "../navigation/Navigation";
 import { get_city_info, get_country_info } from "@/fetch/rankings";
@@ -12,14 +12,39 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useParams } from "react-router-dom";
+import { colorIndex } from "@/helpers/colorIndex";
+import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 
 const CityDescription = () => {
   const [city, setCity] = React.useState(null);
+  const [chartdata_aq, setAQ] = useState([]);
+  const [chartdata_sc, setSC] = useState([]);
   const { cityname } = useParams();
 
   useEffect(() => {
     get_city_info(cityname).then((data) => {
       setCity(data);
+      let tmp = [
+        {
+          cat: "",
+          aqi: data.data[0].aqi,
+          pm25: data.data[0].pm25,
+          pm10: data.data[0].pm10,
+          o3: data.data[0].o3,
+        },
+      ];
+      setAQ(tmp);
+
+      tmp = [
+        {
+          cat: "Socio Economic Status",
+          population: data.population,
+          gdp: data.gdp,
+          gdpPerCapita: data.gdpPerCapita,
+        },
+      ];
+
+      setSC(tmp);
     });
   }, []);
 
@@ -35,15 +60,26 @@ const CityDescription = () => {
           </p>
         </div>
         <div className={styles.aqiColorBox}>
-          <div className={styles.aqiScoreBox}>
+          <div className={colorIndex(city?.data[0].aqi) + " p-4 rounded"}>
             <p> US AQI</p>
             <h2>{city?.data[0].aqi}</h2>
           </div>
           <div className={styles.aqiTextBox}>
-            <p>LIve AQI INDEX</p>
-            <h2>Hazardous</h2>
+            <p>Live AQI INDEX</p>
+            {/* <h2>Hazardous</h2> */}
           </div>
         </div>
+      </div>
+
+      <div className="flex justify-center">
+        {chartdata_aq &&
+          GroupedBarChart(
+            chartdata_aq,
+            "cat",
+            ["aqi", "pm25", "pm10", "o3"],
+            "",
+            ""
+          )}
       </div>
 
       <div className={styles.tableBox}>

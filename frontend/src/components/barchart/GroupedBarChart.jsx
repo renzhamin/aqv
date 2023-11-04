@@ -9,6 +9,8 @@ import {
   Legend,
 } from "recharts";
 
+const colors = ["#E57333", "#3366CC", "#33CC57", "#E63391", "#B933CC"];
+
 const GroupedBarChart = (data, xKey, yKeys, xLabel, yLabel) => {
   return (
     <BarChart
@@ -28,7 +30,7 @@ const GroupedBarChart = (data, xKey, yKeys, xLabel, yLabel) => {
       <Tooltip />
       <Legend />
       {yKeys.map((key, index) => (
-        <Bar dataKey={key} key={key} fill={`#${index % 10}00`} />
+        <Bar dataKey={key} key={key} fill={colors[index % colors.length]} />
       ))}
     </BarChart>
   );
