@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 import { colorIndex } from "@/helpers/colorIndex";
 import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 
-import SearchBar from '../search/search'
+import SearchBar from "../search/search";
 
 const CityDescription = () => {
   const [city, setCity] = React.useState(null);
@@ -51,11 +51,9 @@ const CityDescription = () => {
     });
   }, []);
 
-  console.log(city);
-
   return (
     <div className={styles.cityDescription}>
-      <NavigationSub/>
+      <NavigationSub />
       <h2 className={styles.topSpace}></h2>
       <div className={styles.topBox}>
         <div className={styles.titleBox}>
@@ -87,8 +85,8 @@ const CityDescription = () => {
           )}
       </div>
 
-      <p>Compare With</p>
-      <SearchBar city1={city}/>
+      <p className="mx-auto text-center mt-6">Compare With</p>
+      <SearchBar city1={city} />
 
       <div className={styles.tableBox}>
         <p>OVERVIEW</p>
