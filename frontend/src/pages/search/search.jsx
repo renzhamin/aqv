@@ -45,7 +45,7 @@ const frameworks = [
 
 import styles from './search.module.css'
 
-const search = () => {
+const search = ({city1}) => {
     const [open, setOpen] = useState(false);
     const [city, setCity] = useState("");
     const { best } = useContext(AppContext);
@@ -55,7 +55,10 @@ const search = () => {
     useEffect(() => {
       console.log(city)
       if(city == '' || city == null || city ==undefined){}
-      else navigate(`/city/${city}`);
+      else {
+        console.log("hello"+ city1.city_name, city);
+        navigate(`/comp/${city1.city_name}-${city}`);
+      }
     }, [city]);
     
     return (

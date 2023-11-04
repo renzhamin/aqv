@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CityDescription.module.css";
-import Navigation from "../navigation/Navigation";
+import NavigationSub from "../navigation/NavigationSub";
 import { get_city_info, get_country_info } from "@/fetch/rankings";
 
 import {
@@ -16,6 +16,8 @@ import { colorIndex } from "@/helpers/colorIndex";
 import { aqiuslegend } from "@/helpers/aqiuslegend";
 import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 
+import SearchBar from '../search/search'
+
 const CityDescription = () => {
   const [city, setCity] = React.useState(null);
   const [chartdata_aq, setAQ] = useState([]);
@@ -23,6 +25,7 @@ const CityDescription = () => {
   const { cityname } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls the page to the top on route change
     get_city_info(cityname).then((data) => {
       setCity(data);
       let tmp = [
@@ -53,7 +56,7 @@ const CityDescription = () => {
 
   return (
     <div className={styles.cityDescription}>
-      <Navigation />
+      <NavigationSub/>
       <h2 className={styles.topSpace}></h2>
       <div className={styles.topBox}>
         <div className={styles.titleBox}>
@@ -75,7 +78,7 @@ const CityDescription = () => {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-16">
         {chartdata_aq &&
           GroupedBarChart(
             chartdata_aq,
@@ -85,6 +88,9 @@ const CityDescription = () => {
             ""
           )}
       </div>
+
+      <p>Compare With</p>
+      <SearchBar city1={city}/>
 
       <div className={styles.tableBox}>
         <p>OVERVIEW</p>

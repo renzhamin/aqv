@@ -98,15 +98,6 @@ const Navigation = () => {
               <Link to="/" className="navMenuPageLinks">
                 Home
               </Link>
-              <a href="#map" className="navMenuPageLinks">
-                Map
-              </a>
-              <a href="#worstCities" className="navMenuPageLinks">
-                Worst Cities
-              </a>
-              <a href="#bestCities" className="navMenuPageLinks">
-                Best Cities
-              </a>
             </div>
           </div>
           <div className="navExtra" onClick={() => respNav()}></div>
