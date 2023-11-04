@@ -12,15 +12,15 @@ const aqi_api =
     apiKey
 
 const gdp_api =
-    "https://api.worldbank.org/v2/country/{{country}}/indicator/NY.GDP.MKTP.CD?date=2022&format=json"
+    "https://api.worldbank.org/v2/country/{{country}}/indicator/NY.GDP.MKTP.CD?date={{year}}&format=json"
 const gdp_per_capita_api =
-    "https://api.worldbank.org/v2/country/{{country}}/indicator/NY.GDP.PCAP.PP.CD?date=2022&format=json"
+    "https://api.worldbank.org/v2/country/{{country}}/indicator/NY.GDP.PCAP.PP.CD?date={{year}}&format=json"
 const gdp_growth_api =
-    "https://api.worldbank.org/v2/country/{{country}}/indicator/NY.GDP.MKTP.KD.ZG?date=2022&format=json"
+    "https://api.worldbank.org/v2/country/{{country}}/indicator/NY.GDP.MKTP.KD.ZG?date={{year}}&format=json"
 const population_api =
-    "https://api.worldbank.org/v2/country/{{country}}/indicator/SP.POP.TOTL?date=2022&format=json"
+    "https://api.worldbank.org/v2/country/{{country}}/indicator/SP.POP.TOTL?date={{year}}&format=json"
 const population_growth_api =
-    "https://api.worldbank.org/v2/country/{{country}}/indicator/SP.POP.GROW?date=2022&format=json"
+    "https://api.worldbank.org/v2/country/{{country}}/indicator/SP.POP.GROW?date={{year}}&format=json"
 
 export async function get_city_info(cityname) {
     const city_info = cached_data.get(cityname)
@@ -66,7 +66,10 @@ export async function get_country_info(country_code) {
 }
 
 async function fetchData(api, countryCode) {
-    const url = api.replace("{{country}}", countryCode)
+    const currentYear = new Date().getFullYear() - 1;
+    const url = api
+        .replace("{{country}}", countryCode)
+        .replace("{{year}}", currentYear)
     const response = await fetch(url)
     const data = await response.json()
     return data[1][0].value
