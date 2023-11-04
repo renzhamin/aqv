@@ -95,7 +95,7 @@ const Navigation = () => {
         <div className="navMain">
           <div className="navMenu">
             <div className="my-auto navSubMenu">
-              <Link href="/" className="navMenuPageLinks">
+              <Link to="/" className="navMenuPageLinks">
                 Home
               </Link>
               <a href="#map" className="navMenuPageLinks">

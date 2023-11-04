@@ -5,6 +5,7 @@ import AirQuality from "../airQuality/AirQuality";
 import Footer from "../footer/Footer";
 import { SearchBar } from "@/components/search";
 
+
 const HomePage = () => {
   return (
     <div>

@@ -11,8 +11,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { colorIndex } from "@/helpers/colorIndex";
+import { useNavigate, useHistory } from 'react-router-dom';
+
 
 const TopTen = ({ airQualityData }) => {
+
+  const navigate = useNavigate();
+  const history = useHistory(); 
+
   return (
     <div>
       <Table className={styles.table}>
@@ -28,7 +34,7 @@ const TopTen = ({ airQualityData }) => {
 
         <TableBody>
           {airQualityData.map((item, index) => (
-            <TableRow key={item.city}>
+            <TableRow key={item.city} onClick={() => navigate(`/city/${item.state}`)}>
               <TableCell className="font-bold text-xl">{index + 1}</TableCell>
               <TableCell>
                 <div className="float-left mr-4">

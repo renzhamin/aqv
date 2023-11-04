@@ -16,47 +16,50 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
 import { AppContext } from "@/App";
 
 
 const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
+    {
+      value: "next.js",
+      label: "Next.js",
+    },
+    {
+      value: "sveltekit",
+      label: "SvelteKit",
+    },
+    {
+      value: "nuxt.js",
+      label: "Nuxt.js",
+    },
+    {
+      value: "remix",
+      label: "Remix",
+    },
+    {
+      value: "astro",
+      label: "Astro",
+    },
+  ];
 
-export function SearchBar() {
-  const [open, setOpen] = useState(false);
-  const [city, setCity] = useState("");
-  const { best } = useContext(AppContext);
+import styles from './search.module.css'
 
-  const navigate = useNavigate();
+const search = () => {
+    const [open, setOpen] = useState(false);
+    const [city, setCity] = useState("");
+    const { best } = useContext(AppContext);
   
-  useEffect(() => {
-    console.log(city)
-    if(city == '' || city == null || city ==undefined){}
-    else navigate(`/city/${city}`);
-  }, [city]);
-  
-  return (
-    <div>
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+      console.log(city)
+      if(city == '' || city == null || city ==undefined){}
+      else navigate(`/city/${city}`);
+    }, [city]);
+    
+    return (
+        <div>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild className="mt-8 ml-[40vw]">
                 <Button
@@ -99,5 +102,7 @@ export function SearchBar() {
                 </PopoverContent>
             </Popover>
         </div>
-  );
+    )
 }
+
+export default search
