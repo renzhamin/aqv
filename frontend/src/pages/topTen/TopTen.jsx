@@ -11,13 +11,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { colorIndex } from "@/helpers/colorIndex";
-import { useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const TopTen = ({ airQualityData }) => {
 
   const navigate = useNavigate();
-  const history = useHistory(); 
 
   return (
     <div>
