@@ -17,47 +17,48 @@ function ChartComp() {
   city2name = city2name[0].toUpperCase() + city2name.slice(1);
 
   useEffect(() => {
-    get_city_info(city1name).then((city1) => {
-      get_city_info(city2name).then((city2) => {
-        const data = [];
-        const aqis = [];
-        const pm25s = [];
-        const pm10s = [];
-        const o3s = [];
-        const citylist = [city1, city2];
-        citylist.forEach((city) => {
-          aqis.push(city.data[0].aqi);
-          pm25s.push(city.data[0].pm25);
-          pm10s.push(city.data[0].pm10);
-          o3s.push(city.data[0].o3);
-        });
+    const city1 = get_city_info(city1name);
+    const city2 = get_city_info(city2name);
 
-        data.push({
-          name: "AQI",
-          [citylist[0].city_name]: aqis[0],
-          [citylist[1].city_name]: aqis[1],
-        });
-        data.push({
-          name: "pm25",
-          [citylist[0].city_name]: pm25s[0],
-          [citylist[1].city_name]: pm25s[1],
-        });
+    Promise.all([city1, city2]).then((citylist) => {
+      const data = [];
+      const aqis = [];
+      const pm25s = [];
+      const pm10s = [];
+      const o3s = [];
 
-        data.push({
-          name: "pm10",
-          [citylist[0].city_name]: pm10s[0],
-          [citylist[1].city_name]: pm10s[1],
-        });
-
-        data.push({
-          name: "o3",
-          [citylist[0].city_name]: o3s[0],
-          [citylist[1].city_name]: o3s[1],
-        });
-
-        setCities(data);
-        setUpdated(true);
+      citylist.forEach((city) => {
+        aqis.push(city.data[0].aqi);
+        pm25s.push(city.data[0].pm25);
+        pm10s.push(city.data[0].pm10);
+        o3s.push(city.data[0].o3);
       });
+
+      data.push({
+        name: "AQI",
+        [citylist[0].city_name]: aqis[0],
+        [citylist[1].city_name]: aqis[1],
+      });
+      data.push({
+        name: "pm25",
+        [citylist[0].city_name]: pm25s[0],
+        [citylist[1].city_name]: pm25s[1],
+      });
+
+      data.push({
+        name: "pm10",
+        [citylist[0].city_name]: pm10s[0],
+        [citylist[1].city_name]: pm10s[1],
+      });
+
+      data.push({
+        name: "o3",
+        [citylist[0].city_name]: o3s[0],
+        [citylist[1].city_name]: o3s[1],
+      });
+
+      setCities(data);
+      setUpdated(true);
     });
   }, []);
 
