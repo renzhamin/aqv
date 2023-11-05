@@ -1,20 +1,20 @@
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
-import React, { useState } from "react";
+import React from "react";
 import GroupedBarChart from "./barchart/GroupedBarChart"; // Import the custom hook
 
 import { AppContext } from "@/App";
 import { Button } from "@/components/ui/button";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
 } from "@/components/ui/command";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
@@ -67,14 +67,7 @@ function SearchBar({ city, setCity }) {
   );
 }
 
-const data = [
-  { month: "Jan", group1: 20, group2: 30, group3: 10 },
-  { month: "Feb", group1: 25, group2: 35, group3: 15 },
-  { month: "Feb", group1: 25, group2: 35, group3: 15 },
-];
-
 function Compare() {
-  const [cities, setCities] = useState([]);
   const [city, setCity] = React.useState("");
 
   return (

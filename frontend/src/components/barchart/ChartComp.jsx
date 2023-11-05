@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import GroupedBarChart from "./GroupedBarChart"; // Import the custom hook
 import { useParams } from "react-router-dom";
 import { get_city_info } from "@/fetch/rankings";
-
-const cities = [
-  { city_name: "Dhaka", data: { aqi: 100, pm25: 20, pm10: 30, o3: 50 } },
-  { city_name: "Barishal", data: { aqi: 80, pm25: 10, pm10: 20, o3: 30 } },
-];
+import Loading from "@/pages/loading/Loading";
 
 function ChartComp() {
   const { cities } = useParams();
@@ -66,9 +62,15 @@ function ChartComp() {
   }, []);
 
   return (
-    <div>
-      {updated &&
-        GroupedBarChart(citys, "name", [city1name, city2name], "", "Value")}
+    <div class="flex justify-center items-center h-screen">
+      {(updated &&
+        GroupedBarChart(
+          citys,
+          "name",
+          [city1name, city2name],
+          "",
+          "Value"
+        )) || <Loading />}
     </div>
   );
 }

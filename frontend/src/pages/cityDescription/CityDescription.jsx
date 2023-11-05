@@ -26,7 +26,6 @@ const CityDescription = () => {
   const { cityname } = useParams();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls the page to the top on route change
     get_city_info(cityname).then((data) => {
       setCity(data);
       let tmp = [
@@ -41,11 +40,9 @@ const CityDescription = () => {
       setAQ(tmp);
       setLoading(false);
     });
-  }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+    setTimeout(() => window.scrollTo(0, 0), 0);
+  }, []);
 
   return (
     <div className={styles.cityDescription}>
@@ -71,14 +68,15 @@ const CityDescription = () => {
       </div>
 
       <div className="flex justify-center mt-16">
-        {chartdata_aq &&
-          GroupedBarChart(
-            chartdata_aq,
-            "cat",
-            ["aqi", "pm25", "pm10", "o3"],
-            "",
-            ""
-          )}
+        {(loading && <Loading />) ||
+          (chartdata_aq &&
+            GroupedBarChart(
+              chartdata_aq,
+              "cat",
+              ["aqi", "pm25", "pm10", "o3"],
+              "",
+              ""
+            ))}
       </div>
 
       <p className="mx-auto text-center mt-6" id="compare">
