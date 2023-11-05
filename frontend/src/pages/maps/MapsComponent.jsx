@@ -1,10 +1,9 @@
 import { get_cities_by_aqi } from "@/fetch/rankings";
+import { colorIndex } from "@/helpers/colorIndex";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef } from "react";
 import styles from "./MapsCompopnent.module.css";
-import { colorIndex } from "@/helpers/colorIndex";
-import SearchBar from '../search/search'
 
 const MapsComponent = () => {
   const mapContainer = useRef(null);
@@ -41,7 +40,7 @@ const MapsComponent = () => {
   return (
     <>
       <div className={styles.mapContaner} id="map">
-          <p className={styles.title}>Explore your Air Quality</p>
+        <p className={styles.title}>Explore your Air Quality</p>
         <div
           ref={mapContainer}
           style={{ height: "30vw", width: "90%", margin: "auto" }}

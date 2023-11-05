@@ -1,19 +1,28 @@
-import React from "react";
-import Navigation from "../navigation/Navigation";
-import MapsComponent from "../maps/MapsComponent";
-import AirQuality from "../airQuality/AirQuality";
-import Footer from "../footer/Footer";
-import { SearchBar } from "@/components/search";
-
+import React, { lazy, Suspense } from "react";
+const Navigation = lazy(() => import("../navigation/Navigation"));
+const MapsComponent = lazy(() => import("../maps/MapsComponent"));
+const AirQuality = lazy(() => import("../airQuality/AirQuality"));
+const Footer = lazy(() => import("../footer/Footer"));
+const SearchBar = lazy(() => import("@/components/search"));
 
 const HomePage = () => {
   return (
     <div>
-      <Navigation />
-      <MapsComponent />
-      <SearchBar />
-      <AirQuality />
-      <Footer />
+      <Suspense>
+        <Navigation />
+      </Suspense>
+      <Suspense>
+        <MapsComponent />
+      </Suspense>
+      <Suspense>
+        <SearchBar />
+      </Suspense>
+      <Suspense>
+        <AirQuality />
+      </Suspense>
+      <Suspense>
+        <Footer />
+      </Suspense>
     </div>
   );
 };
