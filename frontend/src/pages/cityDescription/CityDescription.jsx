@@ -1,8 +1,9 @@
+import { get_city_info } from "@/fetch/rankings";
 import React, { useEffect, useState } from "react";
-import styles from "./CityDescription.module.css";
 import NavigationSub from "../navigation/NavigationSub";
-import { get_city_info, get_country_info } from "@/fetch/rankings";
+import styles from "./CityDescription.module.css";
 
+import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 import {
   Table,
   TableBody,
@@ -11,19 +12,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useParams } from "react-router-dom";
 import { colorIndex } from "@/helpers/colorIndex";
-import GroupedBarChart from "@/components/barchart/GroupedBarChart";
+import { useParams } from "react-router-dom";
 
-import SearchBar from '../search/search'
-import Loading from "../loading/Loading";
 import Footer from "../footer/Footer";
+import Loading from "../loading/Loading";
+import SearchBar from "../search/search";
 
 const CityDescription = () => {
   const [loading, setLoading] = React.useState(true);
   const [city, setCity] = React.useState(null);
   const [chartdata_aq, setAQ] = useState([]);
-  const [chartdata_sc, setSC] = useState([]);
   const { cityname } = useParams();
 
   useEffect(() => {
@@ -40,27 +39,12 @@ const CityDescription = () => {
         },
       ];
       setAQ(tmp);
-
-      tmp = [
-        {
-          cat: "Socio Economic Status",
-          population: data.population,
-          gdp: data.gdp,
-          gdpPerCapita: data.gdpPerCapita,
-        },
-      ];
-
-      setSC(tmp);
       setLoading(false);
     });
   }, []);
 
-  // console.log(city);
-
   if (loading) {
-    return(
-      <Loading />
-    );
+    return <Loading />;
   }
 
   return (
@@ -97,8 +81,9 @@ const CityDescription = () => {
           )}
       </div>
 
-
-      <p className="mx-auto text-center mt-6" id="compare">Compare With</p>
+      <p className="mx-auto text-center mt-6" id="compare">
+        Compare With
+      </p>
       <SearchBar city1={city} />
 
       <div className={styles.tableBox}>
@@ -123,7 +108,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
 
-        <Table className={styles.table2} >
+        <Table className={styles.table2}>
           <TableHeader>
             <TableRow className={styles.tableHeader}>
               <TableHead>Polutant</TableHead>
@@ -193,7 +178,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
