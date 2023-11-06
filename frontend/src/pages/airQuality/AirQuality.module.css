@@ -30,3 +30,23 @@
         margin-bottom: 2vw;
     }
 }
+
+.poluClnToggleButtonBox{
+    width: 22vw;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4vw;
+}
+.cityButtonClicked{
+    background-color: rgb(34,39,76);
+    color: white;
+}
+.cityButtonClicked:hover{
+    background-color: rgba(34,39,106);
+    color: white;
+}
+.cityButtonNotClicked{
+    border: 2px solid rgb(34,39,76);
+    background-color: transparent;
+    color: white;
+}

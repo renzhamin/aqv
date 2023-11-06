@@ -148,6 +148,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
         <br />
+        
         <h2>What is the socio economic factor in {city?.countryName}?</h2>
         <Table className={styles.table3} id="score">
           <TableHeader>
