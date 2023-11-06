@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SearchBar from "../search/searchbar";
 import { AppContext } from "@/App";
+import { BookmarkX } from "lucide-react";
 
 function get_data(citylist, type, data) {
   const res = {
@@ -27,6 +28,25 @@ function capitalize(str) {
   return ret;
 }
 
+function Item({ name }) {
+  const { cities } = useParams();
+  const navigate = useNavigate();
+  return (
+    <div className="flex bg-accent rounded">
+      <span>{name}</span>
+      <BookmarkX
+        onClick={() => {
+          const lname = name?.toLowerCase();
+          let newParam = cities.replace(lname + "-", "");
+          newParam = newParam.replace("-" + lname, "");
+          navigate("/compare/" + newParam);
+        }}
+        className="cursor-pointer"
+      />
+    </div>
+  );
+}
+
 function ChartComp() {
   const { cities } = useParams();
   const [updated, setUpdated] = useState(false);
@@ -37,10 +57,12 @@ function ChartComp() {
   const citynames = cities.split("-").map((cityname) => capitalize(cityname));
 
   useEffect(() => {
+    setSelected("");
     if (selected) {
+      const sel_city = capitalize(selected);
+      if (citynames.findIndex((name) => name === sel_city) !== -1) return;
       setUpdated(false);
       navigate("/compare/" + cities + "-" + selected);
-      setSelected("");
     }
   }, [selected]);
 
@@ -73,7 +95,7 @@ function ChartComp() {
   }, [cities]);
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
+    <div className="h-screen flex flex-col justify-center items-center gap-4 max-w-min mx-auto my-auto">
       <div className="w-full flex justify-center">
         {updated && (
           <SearchBar
@@ -84,6 +106,13 @@ function ChartComp() {
           />
         )}
       </div>
+      {updated && (
+        <div className="w-full flex justify-center flex-wrap gap-4">
+          {citynames.map((cityname, index) => (
+            <Item key={index} name={cityname} />
+          ))}
+        </div>
+      )}
       <div className={!updated ? "h-full" : ""}>
         {(updated &&
           GroupedBarChart(citys, "name", citynames, "", "Value")) || (
