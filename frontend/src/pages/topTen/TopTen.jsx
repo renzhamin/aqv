@@ -1,21 +1,17 @@
-import React, { useEffect } from "react";
 import styles from "./TopTen.module.css";
 
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { colorIndex } from "@/helpers/colorIndex";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 const TopTen = ({ airQualityData }) => {
-
   const navigate = useNavigate();
 
   return (
@@ -33,7 +29,10 @@ const TopTen = ({ airQualityData }) => {
 
         <TableBody>
           {airQualityData.map((item, index) => (
-            <TableRow key={item.city} onClick={() => navigate(`/city/${item.state}`)}>
+            <TableRow
+              key={item.city}
+              onClick={() => navigate(`/city/${item.city}`)}
+            >
               <TableCell className="font-bold text-xl">{index + 1}</TableCell>
               <TableCell>
                 <div className="float-left mr-4">

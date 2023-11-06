@@ -12,31 +12,59 @@ html {
 }
 
 .colPurple {
-  background-color: rgb(160, 106, 123);
+  background-color: #915c6c;
 }
 
 .colPink {
-  background-color: rgb(160, 112, 182);
+  background-color: #8a5d9d;
 }
 
 .colRed {
-  background-color: rgb(246, 94, 95);
+  background-color: #e84b50;
 }
 
 .colOrange {
-  background-color: rgb(249, 144, 73);
+  background-color: #f27e2f;
 }
 
 .colYellow {
-  background-color: rgb(250, 207, 57);
+  background-color: #efbe1d;
 }
 
 .colGreen {
-  background-color: rgb(156, 216, 78);
+  background-color: #87c13c;
 }
 
 .colBlue {
   background-color: rgb(96, 172, 203);
+}
+
+.colLightPurple {
+  background-color: #a87383; /* Lighter shade of purple */
+}
+
+.colLightPink {
+  background-color: #a97abc; /* Lighter shade of pink */
+}
+
+.colLightRed {
+  background-color: #fe6a69; /* Lighter shade of red */
+}
+
+.colLightOrange {
+  background-color: #ff9b57; /* Lighter shade of orange */
+}
+
+.colLightYellow {
+  background-color: #fdd64b; /* Lighter shade of yellow */
+}
+
+.colLightGreen {
+  background-color: #a8e05f; /* Lighter shade of green */
+}
+
+.colLightBlue {
+  background-color: #60accb; /* Lighter shade of blue */
 }
 
 .marker {
