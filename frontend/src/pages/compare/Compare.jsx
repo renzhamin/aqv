@@ -39,6 +39,7 @@ function Item({ name }) {
           const lname = name?.toLowerCase();
           let newParam = cities.replace(lname + "-", "");
           newParam = newParam.replace("-" + lname, "");
+          newParam = newParam.replace(name + "-", "");
           navigate("/compare/" + newParam);
         }}
         className="cursor-pointer"
