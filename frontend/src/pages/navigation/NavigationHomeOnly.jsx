@@ -2,10 +2,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import "./Navigation.css";
 
-import { Link as ScrollLink } from "react-scroll";
-
-import { Link } from "react-router-dom";
 import { ModeToggle } from "@/components/darkToggle";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   var count = 0;

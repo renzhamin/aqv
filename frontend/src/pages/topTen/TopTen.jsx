@@ -31,7 +31,9 @@ const TopTen = ({ airQualityData }) => {
           {airQualityData.map((item, index) => (
             <TableRow
               key={item.city}
-              onClick={() => navigate(`/city/${item.city}`)}
+              onClick={() =>
+                navigate(`/city/${item.city}`, { state: { aqi: item.aqi } })
+              }
             >
               <TableCell className="font-bold text-xl">{index + 1}</TableCell>
               <TableCell>

@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { colorIndex, colorIndex2 } from "@/helpers/colorIndex";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Footer from "../footer/Footer";
 import Loading from "../loading/Loading";
 import SearchBar from "../search/search";
@@ -24,15 +24,16 @@ const CityDescription = () => {
   const [city, setCity] = React.useState(null);
   const [chartdata_aq, setAQ] = useState([]);
   const { cityname } = useParams();
+  const cur_aqi = useLocation().state?.aqi;
 
   useEffect(() => {
     get_city_info(cityname).then((data) => {
-      console.log(data)
+      console.log(data);
       setCity(data);
       let tmp = [
         {
           cat: "",
-          aqi: data.aqi,
+          aqi: cur_aqi ?? data.aqi,
           pm25: data.pm25,
           pm10: data.pm10,
           o3: data.o3,
@@ -44,8 +45,6 @@ const CityDescription = () => {
 
     setTimeout(() => window.scrollTo(0, 0), 0);
   }, []);
-
-  console.log(city)
 
   return (
     <div className={styles.cityDescription}>
@@ -60,22 +59,22 @@ const CityDescription = () => {
         </div>
         <div
           className={`${colorIndex2(
-            city?.aqi
+            cur_aqi ?? city?.aqi
           )} rounded-lg flex justify-between py-3 px-8 text-white w-1/2`}
         >
           <div
             className={
-              colorIndex(city?.aqi) +
+              colorIndex(cur_aqi ?? city?.aqi) +
               " p-4 rounded w-1/4 flex flex-col items-center justify-center"
             }
           >
             <p> US AQI</p>
-            <h2>{city?.aqi}</h2>
+            <h2>{cur_aqi ?? city?.aqi}</h2>
           </div>
           <div className="flex flex-col justify-center items-center">
             <p>Live AQI INDEX</p>
             <h2 className="my-auto text-4xl">
-              {aqiuslegend(city?.aqi)}
+              {aqiuslegend(cur_aqi ?? city?.aqi)}
             </h2>
           </div>
         </div>
@@ -114,7 +113,7 @@ const CityDescription = () => {
           <TableBody>
             <TableRow>
               <TableCell>Hazardous</TableCell>
-              <TableCell>{city?.aqi} US AQI</TableCell>
+              <TableCell>{cur_aqi ?? city?.aqi} US AQI</TableCell>
               <TableCell>PM2.5</TableCell>
             </TableRow>
           </TableBody>
@@ -148,7 +147,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
         <br />
-        
+
         <h2>What is the socio economic factor in {city?.countryName}?</h2>
         <Table className={styles.table3} id="score">
           <TableHeader>

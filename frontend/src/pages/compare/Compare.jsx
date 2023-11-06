@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import SearchBar from "../search/searchbar";
 import { AppContext } from "@/App";
 import { BookmarkX } from "lucide-react";
+import Navigation from "../navigation/NavigationHomeOnly";
 
 function get_data(citylist, type, data) {
   const res = {
@@ -96,31 +97,34 @@ function ChartComp() {
   }, [cities]);
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center gap-4 max-w-min mx-auto my-auto">
-      <div className="w-full flex justify-center">
-        {updated && (
-          <SearchBar
-            selected={selected}
-            setSelected={setSelected}
-            promptString={"Add City"}
-            data={worst}
-          />
-        )}
-      </div>
-      {updated && (
-        <div className="w-full flex justify-center flex-wrap gap-4">
-          {citynames.map((cityname, index) => (
-            <Item key={index} name={cityname} />
-          ))}
+    <>
+      <Navigation />
+      <div className="h-screen flex flex-col justify-center items-center gap-4 max-w-min mx-auto my-auto">
+        <div className="w-full flex justify-center">
+          {updated && (
+            <SearchBar
+              selected={selected}
+              setSelected={setSelected}
+              promptString={"Add City"}
+              data={worst}
+            />
+          )}
         </div>
-      )}
-      <div className={!updated ? "h-full" : ""}>
-        {(updated &&
-          GroupedBarChart(citys, "name", citynames, "", "Value")) || (
-          <Loading />
+        {updated && (
+          <div className="w-full flex justify-center flex-wrap gap-4">
+            {citynames.map((cityname, index) => (
+              <Item key={index} name={cityname} />
+            ))}
+          </div>
         )}
+        <div className={!updated ? "h-full" : ""}>
+          {(updated &&
+            GroupedBarChart(citys, "name", citynames, "", "Value")) || (
+            <Loading />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
