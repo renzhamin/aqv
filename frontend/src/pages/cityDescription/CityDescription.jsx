@@ -12,14 +12,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { colorIndex } from "@/helpers/colorIndex";
-import { aqiuslegend } from "@/helpers/aqiuslegend";
-import SearchBar from '../search/search'
-import { colorIndex2 } from "@/helpers/colorIndex2";
+import { colorIndex, colorIndex2 } from "@/helpers/colorIndex";
 import { useParams } from "react-router-dom";
 import Footer from "../footer/Footer";
 import Loading from "../loading/Loading";
-
+import SearchBar from "../search/search";
+import { aqiuslegend } from "@/helpers/aqiuslegend";
 
 const CityDescription = () => {
   const [loading, setLoading] = React.useState(true);
@@ -57,14 +55,25 @@ const CityDescription = () => {
             Air quality index (AQI) and PM2.5 air pollution in {city?.city_name}
           </p>
         </div>
-        <div className={`${colorIndex2(city?.data[0].aqi)} rounded-lg flex justify-between py-3 px-8 text-white w-1/2`}>
-          <div className={colorIndex(city?.data[0].aqi) + " p-4 rounded"}>
+        <div
+          className={`${colorIndex2(
+            city?.data[0].aqi
+          )} rounded-lg flex justify-between py-3 px-8 text-white w-1/2`}
+        >
+          <div
+            className={
+              colorIndex(city?.data[0].aqi) +
+              " p-4 rounded w-1/4 flex flex-col items-center justify-center"
+            }
+          >
             <p> US AQI</p>
             <h2>{city?.data[0].aqi}</h2>
           </div>
-          <div className={styles.aqiTextBox}>
+          <div className="flex flex-col justify-center items-center">
             <p>Live AQI INDEX</p>
-            {aqiuslegend(city?.data[0].aqi)}
+            <h2 className="my-auto text-4xl">
+              {aqiuslegend(city?.data[0].aqi)}
+            </h2>
           </div>
         </div>
       </div>
@@ -149,19 +158,25 @@ const CityDescription = () => {
             <TableRow>
               <TableCell>Total GDP</TableCell>
               <TableCell></TableCell>
-              <TableCell>{city?.gdp}</TableCell>
+              <TableCell>
+                {city?.gdp && parseFloat(city.gdp).toFixed(2)}
+              </TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell>GDP per capita</TableCell>
               <TableCell></TableCell>
-              <TableCell>{city?.gdpPerCapita}</TableCell>
+              <TableCell>
+                {city?.gdpPerCapita && parseFloat(city.gdpPerCapita).toFixed(2)}
+              </TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell>GDP growth</TableCell>
               <TableCell></TableCell>
-              <TableCell>{city?.gdpGrowth}</TableCell>
+              <TableCell>
+                {city?.gdpGrowth && parseFloat(city.gdpGrowth).toFixed(2)}
+              </TableCell>
             </TableRow>
 
             <TableRow>
@@ -173,7 +188,10 @@ const CityDescription = () => {
             <TableRow>
               <TableCell>Population Growth</TableCell>
               <TableCell></TableCell>
-              <TableCell>{city?.populationGrowth}</TableCell>
+              <TableCell>
+                {city?.populationGrowth &&
+                  parseFloat(city.populationGrowth).toFixed(2)}
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>

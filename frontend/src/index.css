@@ -12,27 +12,27 @@ html {
 }
 
 .colPurple {
-  background-color: #915C6C;
+  background-color: #915c6c;
 }
 
 .colPink {
-  background-color: #8A5D9D;
+  background-color: #8a5d9d;
 }
 
 .colRed {
-  background-color: #E84B50;
+  background-color: #e84b50;
 }
 
 .colOrange {
-  background-color: #F27E2F;
+  background-color: #f27e2f;
 }
 
 .colYellow {
-  background-color: #EFBE1D;
+  background-color: #efbe1d;
 }
 
 .colGreen {
-  background-color: #87C13C;
+  background-color: #87c13c;
 }
 
 .colBlue {
@@ -40,33 +40,32 @@ html {
 }
 
 .colLightPurple {
-  background-color: #A87383; /* Lighter shade of purple */
+  background-color: #a87383; /* Lighter shade of purple */
 }
 
 .colLightPink {
-  background-color: #A97ABC; /* Lighter shade of pink */
+  background-color: #a97abc; /* Lighter shade of pink */
 }
 
 .colLightRed {
-  background-color: #FE6A69; /* Lighter shade of red */
+  background-color: #fe6a69; /* Lighter shade of red */
 }
 
 .colLightOrange {
-  background-color: #FF9B57; /* Lighter shade of orange */
+  background-color: #ff9b57; /* Lighter shade of orange */
 }
 
 .colLightYellow {
-  background-color: #FDD64B; /* Lighter shade of yellow */
+  background-color: #fdd64b; /* Lighter shade of yellow */
 }
 
 .colLightGreen {
-  background-color:#A8E05F; /* Lighter shade of green */
+  background-color: #a8e05f; /* Lighter shade of green */
 }
 
 .colLightBlue {
-  background-color: #60ACCB; /* Lighter shade of blue */
+  background-color: #60accb; /* Lighter shade of blue */
 }
-
 
 .marker {
   height: 1vw;
