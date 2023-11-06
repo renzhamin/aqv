@@ -56,10 +56,10 @@ function ChartComp() {
       const o3s = [];
 
       citylist.forEach((city) => {
-        aqis.push(city.data[0].aqi);
-        pm25s.push(city.data[0].pm25);
-        pm10s.push(city.data[0].pm10);
-        o3s.push(city.data[0].o3);
+        aqis.push(city.aqi);
+        pm25s.push(city.pm25);
+        pm10s.push(city.pm10);
+        o3s.push(city.o3);
       });
 
       data.push(get_data(citylist, "AQI", aqis));
