@@ -14,6 +14,12 @@
         font-size: 1.3vw;
         margin-bottom: 2vw;
     }
+    .poluClnToggleButtonBox{
+        width: 22vw;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4vw;
+    }
 }
 @media screen and (max-width: 991px) {
     .airQuality{
@@ -29,14 +35,18 @@
         font-size: 5vw;
         margin-bottom: 2vw;
     }
+    .poluClnToggleButtonBox{
+        
+        width: 95%;
+        /* margin: auto; */
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4vw;
+        margin-top: 2vw;
+    }
 }
 
-.poluClnToggleButtonBox{
-    width: 22vw;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 4vw;
-}
+
 
 .cityButtonNotClicked{
     border: 2px solid rgb(34,39,76);

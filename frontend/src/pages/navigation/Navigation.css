@@ -137,9 +137,9 @@
   .navigation {
     /* background-color: rgb(47,119,111); */
     /* background-color: white; */
-    /* height: 100vh;
-        width: 100%;
-        /* background-color: white; */
+    /* height: 100vh; */
+    width: 100%;
+    background-color: white;
     z-index: 10000;
     position: fixed;
   }
@@ -171,6 +171,7 @@
     right: 5vw;
     font-size: 6.2vw;
     /* color: black; */
+    color: 'grey';
   }
   .navBarIconCross {
     visibility: hidden;
@@ -187,12 +188,11 @@
   }
   .navMenu {
     /* height: 41vh; */
-    height: 84vw;
+    height: 48vw;
     width: 100%;
     /* color: white; */
-    /* color: rgb(37,90,84); */
-    /* background-color: rgb(228, 228, 228); */
-    /* background-color: white; */
+    color: grey;
+    background-color: rgb(228, 228, 228);
   }
   .navSubMenu {
     display: flex;
@@ -208,31 +208,6 @@
     height: 5vh;
     transition: linear 0.1s;
     cursor: pointer;
-  }
-  .watchButton {
-    display: flex;
-    width: 86%;
-    /* height: 7vh; */
-    height: 14vw;
-    margin: auto;
-    border-radius: 7vw;
-    border: 1.5px solid rgb(37, 90, 84);
-    font-weight: 700;
-    /* font-size: 2.2vh; */
-    font-size: 4.4vw;
-    transition: linear 0.2s;
-    cursor: pointer;
-  }
-  .tryLink {
-    width: 86%;
-    /* height: 7vh; */
-    height: 14vw;
-    margin-left: 7%;
-    border-radius: 7vw;
-    /* background-color: rgb(37,90,84); */
-    /* color:white; */
-    font-weight: 600;
-    font-size: 2.2vh;
   }
   .navExtra {
     /* background-color: transparent; */

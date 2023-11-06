@@ -50,7 +50,7 @@ const Navigation = () => {
         </div>
         <div className="navMain">
           <div className="navMenu">
-            <div className="my-auto navSubMenu">
+            <div className="my-auto navSubMenu bg-accent">
               {/* <Link to="" className="navMenuPageLinks">
                 Home
               </Link> */}
@@ -78,7 +78,10 @@ const Navigation = () => {
               >
                 Cities
               </ScrollLink>
-              <ModeToggle />
+              <div>
+                <ModeToggle />
+              </div>
+              
             </div>
           </div>
           <div className="navExtra" onClick={() => respNav()}></div>
