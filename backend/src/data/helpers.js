@@ -40,9 +40,9 @@ export async function get_city_info(cityname) {
         pm25 : data.data[0].pm25,
     }
    
-    cached_data.set(cityname, data)
+    cached_data.set(cityname, res)
 
-    return data
+    return res
 }
 
 export async function get_country_info(country_code) {

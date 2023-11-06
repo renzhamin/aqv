@@ -27,14 +27,15 @@ const CityDescription = () => {
 
   useEffect(() => {
     get_city_info(cityname).then((data) => {
+      console.log(data)
       setCity(data);
       let tmp = [
         {
           cat: "",
-          aqi: data.data[0].aqi,
-          pm25: data.data[0].pm25,
-          pm10: data.data[0].pm10,
-          o3: data.data[0].o3,
+          aqi: data.aqi,
+          pm25: data.pm25,
+          pm10: data.pm10,
+          o3: data.o3,
         },
       ];
       setAQ(tmp);
@@ -43,6 +44,8 @@ const CityDescription = () => {
 
     setTimeout(() => window.scrollTo(0, 0), 0);
   }, []);
+
+  console.log(city)
 
   return (
     <div className={styles.cityDescription}>
@@ -57,22 +60,22 @@ const CityDescription = () => {
         </div>
         <div
           className={`${colorIndex2(
-            city?.data[0].aqi
+            city?.aqi
           )} rounded-lg flex justify-between py-3 px-8 text-white w-1/2`}
         >
           <div
             className={
-              colorIndex(city?.data[0].aqi) +
+              colorIndex(city?.aqi) +
               " p-4 rounded w-1/4 flex flex-col items-center justify-center"
             }
           >
             <p> US AQI</p>
-            <h2>{city?.data[0].aqi}</h2>
+            <h2>{city?.aqi}</h2>
           </div>
           <div className="flex flex-col justify-center items-center">
             <p>Live AQI INDEX</p>
             <h2 className="my-auto text-4xl">
-              {aqiuslegend(city?.data[0].aqi)}
+              {aqiuslegend(city?.aqi)}
             </h2>
           </div>
         </div>
@@ -111,7 +114,7 @@ const CityDescription = () => {
           <TableBody>
             <TableRow>
               <TableCell>Hazardous</TableCell>
-              <TableCell>{city?.data[0].aqi} US AQI</TableCell>
+              <TableCell>{city?.aqi} US AQI</TableCell>
               <TableCell>PM2.5</TableCell>
             </TableRow>
           </TableBody>
@@ -129,18 +132,18 @@ const CityDescription = () => {
             <TableRow>
               <TableCell>PM2.5</TableCell>
               <TableCell></TableCell>
-              <TableCell>{city?.data[0].pm25} µg/m³</TableCell>
+              <TableCell>{city?.pm25} µg/m³</TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell>PM10</TableCell>
               <TableCell></TableCell>
-              <TableCell>{city?.data[0].pm10} µg/m³</TableCell>
+              <TableCell>{city?.pm10} µg/m³</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Ozone (O3) </TableCell>
               <TableCell></TableCell>
-              <TableCell>{city?.data[0].o3} µg/m³</TableCell>
+              <TableCell>{city?.o3} µg/m³</TableCell>
             </TableRow>
           </TableBody>
         </Table>

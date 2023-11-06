@@ -26,7 +26,6 @@ router.use("/city/:cityname", async (req, res) => {
     const { cityname } = req.params
     try {
         let data = await get_city_info(cityname)
-        console.log(data.country_code)
         const country_code = data.country_code
         let country_data = await get_country_info(country_code)
         data = {
