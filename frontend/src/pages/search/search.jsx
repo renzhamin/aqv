@@ -27,7 +27,6 @@ const search = ({ city1 }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(city);
     if (city == "" || city == null || city == undefined) {
     } else {
       navigate(`/compare/${city1.city_name}-${city}`);

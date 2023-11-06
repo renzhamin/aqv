@@ -66,7 +66,7 @@ export async function get_country_info(country_code) {
 }
 
 async function fetchData(api, countryCode) {
-    const currentYear = new Date().getFullYear() - 1;
+    const currentYear = new Date().getFullYear() - 1
     const url = api
         .replace("{{country}}", countryCode)
         .replace("{{year}}", currentYear)

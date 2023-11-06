@@ -26,7 +26,6 @@ export default function SearchBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(city);
     if (city == "" || city == null || city == undefined) {
     } else navigate(`/city/${city}`);
   }, [city]);
