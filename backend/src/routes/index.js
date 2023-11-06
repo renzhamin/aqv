@@ -32,10 +32,8 @@ router.use("/city/:cityname", async (req, res) => {
             ...data,
             ...country_data,
         }
-        console.log(data)
-        
+
         return res.status(200).json(data)
-        
     } catch {
         return res.status(500)
     }
