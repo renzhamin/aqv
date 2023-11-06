@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 import { get_city_info } from "@/fetch/rankings";
 import Loading from "@/pages/loading/Loading";
-import GroupedBarChart from "@/components/barchart/GroupedBarChart";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import SearchBar from "../search/searchbar";
+import { AppContext } from "@/App";
 
 function get_data(citylist, type, data) {
   const res = {
@@ -29,8 +31,17 @@ function ChartComp() {
   const { cities } = useParams();
   const [updated, setUpdated] = useState(false);
   const [citys, setCities] = useState([]);
-
+  const { worst } = useContext(AppContext);
+  const [selected, setSelected] = useState("");
+  const navigate = useNavigate();
   const citynames = cities.split("-").map((cityname) => capitalize(cityname));
+
+  useEffect(() => {
+    if (selected) {
+      navigate("/compare/" + cities + "-" + selected);
+      setSelected("");
+    }
+  }, [selected]);
 
   useEffect(() => {
     const citydata = [];
@@ -50,7 +61,7 @@ function ChartComp() {
         o3s.push(city.data[0].o3);
       });
 
-      data.push(get_data(citylist, "AQI DATA", aqis));
+      data.push(get_data(citylist, "AQI", aqis));
       data.push(get_data(citylist, "pm2.5", pm25s));
       data.push(get_data(citylist, "pm10", pm10s));
       data.push(get_data(citylist, "o3", o3s));
@@ -61,10 +72,23 @@ function ChartComp() {
   }, [cities]);
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      {(updated && GroupedBarChart(citys, "name", citynames, "", "Value")) || (
-        <Loading />
-      )}
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div className="w-full flex justify-center">
+        {updated && (
+          <SearchBar
+            selected={selected}
+            setSelected={setSelected}
+            promptString={"Add City"}
+            data={worst}
+          />
+        )}
+      </div>
+      <div>
+        {(updated &&
+          GroupedBarChart(citys, "name", citynames, "", "Value")) || (
+          <Loading />
+        )}
+      </div>
     </div>
   );
 }
