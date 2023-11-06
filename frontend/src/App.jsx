@@ -7,7 +7,7 @@ import React from "react";
 import Loading from "./pages/loading/Loading";
 
 const HomePage = React.lazy(() => import("./pages/homepage/HomePage"));
-const ChartComp = React.lazy(() => import("./components/barchart/ChartComp"));
+const ChartComp = React.lazy(() => import("./pages/compare/Compare"));
 const CityDescription = React.lazy(() =>
   import("./pages/cityDescription/CityDescription")
 );
@@ -48,7 +48,7 @@ function App() {
                 }
               />
               <Route
-                path="/comp/:cities"
+                path="/compare/:cities"
                 element={
                   <Suspense fallback={<Loading />}>
                     <ChartComp />

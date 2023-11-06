@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigat
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigat
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -16,10 +15,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 import { AppContext } from "@/App";
-
-import styles from "./search.module.css";
 
 const search = ({ city1 }) => {
   const [open, setOpen] = useState(false);
@@ -32,7 +30,7 @@ const search = ({ city1 }) => {
     console.log(city);
     if (city == "" || city == null || city == undefined) {
     } else {
-      navigate(`/comp/${city1.city_name}-${city}`);
+      navigate(`/compare/${city1.city_name}-${city}`);
     }
   }, [city]);
 
