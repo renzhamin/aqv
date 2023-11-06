@@ -17,6 +17,7 @@ import { aqiuslegend } from "@/helpers/aqiuslegend";
 import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 
 import SearchBar from '../search/search'
+import { colorIndex2 } from "@/helpers/colorIndex2";
 
 const CityDescription = () => {
   const [city, setCity] = React.useState(null);
@@ -65,15 +66,14 @@ const CityDescription = () => {
             Air quality index (AQI) and PM2.5 air pollution in {city?.city_name}
           </p>
         </div>
-        <div className={styles.aqiColorBox}>
+        <div className={`${colorIndex2(city?.data[0].aqi)} rounded-lg flex justify-between py-3 px-8 text-white w-1/2`}>
           <div className={colorIndex(city?.data[0].aqi) + " p-4 rounded"}>
             <p> US AQI</p>
             <h2>{city?.data[0].aqi}</h2>
           </div>
           <div className={styles.aqiTextBox}>
             <p>Live AQI INDEX</p>
-
-            {aqiuslegend(city?.data[0].aqi)/* <h2>Hazardous</h2> */}
+            {aqiuslegend(city?.data[0].aqi)}
           </div>
         </div>
       </div>

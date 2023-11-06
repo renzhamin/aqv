@@ -1,4 +1,3 @@
-import styles from "@/pages/topTen/TopTen.module.css";
 
 export const colorIndex = (aqi_score) => {
   if (aqi_score <= 50) {
