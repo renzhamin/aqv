@@ -76,15 +76,7 @@ const Navigation = () => {
                 duration={200}
                 className="navMenuPageLinks"
               >
-                Worst Cities
-              </ScrollLink>
-              <ScrollLink
-                to="bestCities"
-                smooth={true}
-                duration={200}
-                className="navMenuPageLinks"
-              >
-                Best Cities
+                Cities
               </ScrollLink>
               <ModeToggle />
             </div>

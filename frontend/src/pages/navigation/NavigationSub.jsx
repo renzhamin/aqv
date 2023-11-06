@@ -73,14 +73,6 @@ const Navigation = () => {
               >
                 AQI
               </ScrollLink>
-              <ScrollLink
-                to="score"
-                smooth={true}
-                duration={200}
-                className="navMenuPageLinks"
-              >
-                Socio Score
-              </ScrollLink>
               <ModeToggle />
             </div>
           </div>
