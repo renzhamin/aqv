@@ -27,11 +27,19 @@ export async function get_city_info(cityname) {
     if (city_info) return city_info
 
     const url = aqi_api.replace("{{city}}", cityname)
-
+    
+    
     let data = await fetch(url)
-
     data = await data.json()
-
+    const res = {
+        city_name: data.city_name,
+        country_code : data.country_code,
+        aqi: data.data[0].aqi,
+        o3 : data.data[0].o3,
+        pm10 : data.data[0].pm10,
+        pm25 : data.data[0].pm25,
+    }
+   
     cached_data.set(cityname, data)
 
     return data
