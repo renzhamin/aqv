@@ -38,6 +38,7 @@ function ChartComp() {
 
   useEffect(() => {
     if (selected) {
+      setUpdated(false);
       navigate("/compare/" + cities + "-" + selected);
       setSelected("");
     }
@@ -72,7 +73,7 @@ function ChartComp() {
   }, [cities]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="h-screen flex flex-col justify-center items-center">
       <div className="w-full flex justify-center">
         {updated && (
           <SearchBar
@@ -83,7 +84,7 @@ function ChartComp() {
           />
         )}
       </div>
-      <div>
+      <div className={!updated ? "h-full" : ""}>
         {(updated &&
           GroupedBarChart(citys, "name", citynames, "", "Value")) || (
           <Loading />
