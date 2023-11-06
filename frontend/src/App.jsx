@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { get_cities_by_aqi } from "./fetch/rankings";
 import React from "react";
 import Loading from "./pages/loading/Loading";
+import AllCities from "./pages/allCities/AllCities";
 
 const HomePage = React.lazy(() => import("./pages/homepage/HomePage"));
 const ChartComp = React.lazy(() => import("./pages/compare/Compare"));
@@ -60,6 +61,14 @@ function App() {
                 element={
                   <Suspense fallback={<Loading />}>
                     <CityDescription />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/cities/all"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <AllCities />
                   </Suspense>
                 }
               />
