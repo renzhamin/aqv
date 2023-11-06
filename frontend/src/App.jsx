@@ -1,19 +1,23 @@
-import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
-
-import HomePage from "./pages/homepage/HomePage";
-import CityDescription from "./pages/cityDescription/CityDescription";
-
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-import { createContext } from "react";
+import { createContext, Suspense } from "react"; // Import Suspense
+import { ThemeProvider } from "./components/theme-provider";
 import { get_cities_by_aqi } from "./fetch/rankings";
-import ChartComp from "./components/barchart/ChartComp";
+import React from "react";
+import Loading from "./pages/loading/Loading";
+
+const HomePage = React.lazy(() => import("./pages/homepage/HomePage"));
+const ChartComp = React.lazy(() => import("./pages/compare/Compare"));
+const CityDescription = React.lazy(() =>
+  import("./pages/cityDescription/CityDescription")
+);
 
 export const AppContext = createContext();
 
 function App() {
   const [worst, setWorst] = useState([]);
   const [best, setBest] = useState([]);
+
   useEffect(() => {
     get_cities_by_aqi(false).then((data) => {
       setWorst(data);
@@ -26,20 +30,43 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider
-        value={{
-          worst,
-          best,
-        }}
-      >
-        <HashRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/comp/:cities" element={<ChartComp />} />
-            <Route path="/city/:cityname" element={<CityDescription />} />
-          </Routes>
-        </HashRouter>
-      </AppContext.Provider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <AppContext.Provider
+          value={{
+            worst,
+            best,
+          }}
+        >
+          <HashRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <HomePage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/compare/:cities"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ChartComp />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/city/:cityname"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <CityDescription />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </HashRouter>
+        </AppContext.Provider>
+      </ThemeProvider>
     </>
   );
 }

@@ -1,8 +1,6 @@
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigat
+import { useContext, useState } from "react";
 
-import { AppContext } from "@/App";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -18,32 +16,27 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-export default function SearchBar() {
+export default function SearchBar({
+  selected,
+  setSelected,
+  promptString,
+  data,
+}) {
   const [open, setOpen] = useState(false);
-  const [city, setCity] = useState("");
-  const { best } = useContext(AppContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(city);
-    if (city == "" || city == null || city == undefined) {
-    } else navigate(`/city/${city}`);
-  }, [city]);
 
   return (
     <div>
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild className="mt-8 ml-[40vw]">
+        <PopoverTrigger asChild>
           <Button
             variant="outline"
             role="combobox"
             aria-expanded={open}
             className="w-[200px] justify-between "
           >
-            {city
-              ? best.find((item) => item.city === city)?.city
-              : "Select City..."}
+            {selected
+              ? data.find((item) => item.city === selected)?.city
+              : promptString}
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -52,12 +45,12 @@ export default function SearchBar() {
             <CommandInput placeholder="Search City..." className="h-9" />
             <CommandEmpty>No Cities found.</CommandEmpty>
             <CommandGroup className="max-h-64">
-              {best.map((item) => (
+              {data.map((item) => (
                 <CommandItem
                   key={item.city}
                   value={item.city}
                   onSelect={(currentValue) => {
-                    setCity(currentValue === city ? "" : currentValue);
+                    setSelected(currentValue === selected ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
@@ -65,7 +58,7 @@ export default function SearchBar() {
                   <CheckIcon
                     className={cn(
                       "ml-auto h-4 w-4",
-                      city === item.value ? "opacity-100" : "opacity-0"
+                      selected === item.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

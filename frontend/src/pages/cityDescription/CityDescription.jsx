@@ -1,8 +1,9 @@
+import { get_city_info } from "@/fetch/rankings";
 import React, { useEffect, useState } from "react";
-import styles from "./CityDescription.module.css";
 import NavigationSub from "../navigation/NavigationSub";
-import { get_city_info, get_country_info } from "@/fetch/rankings";
+import styles from "./CityDescription.module.css";
 
+import GroupedBarChart from "@/components/barchart/GroupedBarChart";
 import {
   Table,
   TableBody,
@@ -11,22 +12,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useParams } from "react-router-dom";
 import { colorIndex } from "@/helpers/colorIndex";
 import { aqiuslegend } from "@/helpers/aqiuslegend";
-import GroupedBarChart from "@/components/barchart/GroupedBarChart";
-
 import SearchBar from '../search/search'
 import { colorIndex2 } from "@/helpers/colorIndex2";
+import { useParams } from "react-router-dom";
+import Footer from "../footer/Footer";
+import Loading from "../loading/Loading";
+
 
 const CityDescription = () => {
+  const [loading, setLoading] = React.useState(true);
   const [city, setCity] = React.useState(null);
   const [chartdata_aq, setAQ] = useState([]);
-  const [chartdata_sc, setSC] = useState([]);
   const { cityname } = useParams();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls the page to the top on route change
     get_city_info(cityname).then((data) => {
       setCity(data);
       let tmp = [
@@ -39,25 +40,15 @@ const CityDescription = () => {
         },
       ];
       setAQ(tmp);
-
-      tmp = [
-        {
-          cat: "Socio Economic Status",
-          population: data.population,
-          gdp: data.gdp,
-          gdpPerCapita: data.gdpPerCapita,
-        },
-      ];
-
-      setSC(tmp);
+      setLoading(false);
     });
-  }, []);
 
-  console.log(city);
+    setTimeout(() => window.scrollTo(0, 0), 0);
+  }, []);
 
   return (
     <div className={styles.cityDescription}>
-      <NavigationSub/>
+      <NavigationSub />
       <h2 className={styles.topSpace}></h2>
       <div className={styles.topBox}>
         <div className={styles.titleBox}>
@@ -79,24 +70,27 @@ const CityDescription = () => {
       </div>
 
       <div className="flex justify-center mt-16">
-        {chartdata_aq &&
-          GroupedBarChart(
-            chartdata_aq,
-            "cat",
-            ["aqi", "pm25", "pm10", "o3"],
-            "",
-            ""
-          )}
+        {(loading && <Loading />) ||
+          (chartdata_aq &&
+            GroupedBarChart(
+              chartdata_aq,
+              "cat",
+              ["aqi", "pm25", "pm10", "o3"],
+              "",
+              ""
+            ))}
       </div>
 
-      <p>Compare With</p>
-      <SearchBar city1={city}/>
+      <p className="mx-auto text-center mt-6" id="compare">
+        Compare With
+      </p>
+      <SearchBar city1={city} />
 
       <div className={styles.tableBox}>
         <p>OVERVIEW</p>
         <h2>What is the current air quality in {city?.city_name}?</h2>
 
-        <Table className={styles.table1}>
+        <Table className={styles.table1} id="aqi">
           <TableHeader>
             <TableRow className={styles.tableHeader}>
               <TableHead>Air pollution level</TableHead>
@@ -143,7 +137,7 @@ const CityDescription = () => {
         </Table>
         <br />
         <h2>What is the socio economic factor in {city?.countryName}?</h2>
-        <Table className={styles.table2}>
+        <Table className={styles.table3} id="score">
           <TableHeader>
             <TableRow className={styles.tableHeader}>
               <TableHead>Indicator</TableHead>
@@ -184,6 +178,7 @@ const CityDescription = () => {
           </TableBody>
         </Table>
       </div>
+      <Footer />
     </div>
   );
 };
