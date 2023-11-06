@@ -112,7 +112,7 @@ const CityDescription = () => {
 
           <TableBody>
             <TableRow>
-              <TableCell>Hazardous</TableCell>
+              <TableCell>{aqiuslegend(cur_aqi ?? city?.aqi)}</TableCell>
               <TableCell>{cur_aqi ?? city?.aqi} US AQI</TableCell>
               <TableCell>PM2.5</TableCell>
             </TableRow>
@@ -161,16 +161,14 @@ const CityDescription = () => {
             <TableRow>
               <TableCell>Total GDP</TableCell>
               <TableCell></TableCell>
-              <TableCell>
-                {city?.gdp && parseFloat(city.gdp).toFixed(2)}
-              </TableCell>
+              <TableCell>{city?.gdp && parseInt(city.gdp)}</TableCell>
             </TableRow>
 
             <TableRow>
               <TableCell>GDP per capita</TableCell>
               <TableCell></TableCell>
               <TableCell>
-                {city?.gdpPerCapita && parseFloat(city.gdpPerCapita).toFixed(2)}
+                {city?.gdpPerCapita && parseInt(city.gdpPerCapita)}
               </TableCell>
             </TableRow>
 
