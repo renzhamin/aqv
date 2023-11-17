@@ -1,6 +1,11 @@
 import fs from "fs"
 import iso3166 from "iso-3166-1"
-import { cached_data } from "./cache.js"
+import {
+    cache_exp_city,
+    cache_exp_country,
+    cache_exp_ranking,
+    redis,
+} from "./cache.js"
 import "dotenv/config"
 
 const apiKey = process.env.API_KEY
@@ -23,30 +28,29 @@ const population_growth_api =
     "https://api.worldbank.org/v2/country/{{country}}/indicator/SP.POP.GROW?date={{year}}&format=json"
 
 export async function get_city_info(cityname) {
-    const city_info = cached_data.get(cityname)
+    const city_info = await redis.get(cityname)
     if (city_info) return city_info
 
     const url = aqi_api.replace("{{city}}", cityname)
-    
-    
+
     let data = await fetch(url)
     data = await data.json()
     const res = {
         city_name: data.city_name,
-        country_code : data.country_code,
+        country_code: data.country_code,
         aqi: data.data[0].aqi,
-        o3 : data.data[0].o3,
-        pm10 : data.data[0].pm10,
-        pm25 : data.data[0].pm25,
+        o3: data.data[0].o3,
+        pm10: data.data[0].pm10,
+        pm25: data.data[0].pm25,
     }
-   
-    cached_data.set(cityname, res)
+
+    await redis.set(cityname, res, { ex: cache_exp_city })
 
     return res
 }
 
 export async function get_country_info(country_code) {
-    let countryInfo = cached_data.get(country_code)
+    let countryInfo = await redis.get(country_code)
     if (countryInfo) return countryInfo
 
     const country = iso3166.whereAlpha2(country_code)
@@ -56,7 +60,7 @@ export async function get_country_info(country_code) {
     const population = await fetchData(population_api, country_code)
     const populationGrowth = await fetchData(
         population_growth_api,
-        country_code
+        country_code,
     )
 
     countryInfo = {
@@ -68,7 +72,7 @@ export async function get_country_info(country_code) {
         populationGrowth: getValue(populationGrowth),
     }
 
-    cached_data.set(country_code, countryInfo)
+    await redis.set(country_code, countryInfo, { ex: cache_exp_country })
 
     return countryInfo
 }
@@ -116,10 +120,10 @@ export async function get_cities_by_aqi(get_cleanest = true) {
     if (!get_cleanest) sortOrder = "desc"
 
     if (get_cleanest) {
-        const most_cleanest_cities = cached_data.get("most_cleanest_cities")
+        const most_cleanest_cities = await redis.get("most_cleanest_cities")
         if (most_cleanest_cities) return most_cleanest_cities
     } else {
-        const most_polluted_cities = cached_data.get("most_polluted_cities")
+        const most_polluted_cities = await redis.get("most_polluted_cities")
         if (most_polluted_cities) return most_polluted_cities
     }
 
@@ -130,7 +134,7 @@ export async function get_cities_by_aqi(get_cleanest = true) {
                 sortOrder,
                 perPage: 100,
                 page: 1,
-            })
+            }),
     )
     data = await data.json()
 
@@ -157,7 +161,7 @@ export async function get_cities_by_aqi(get_cleanest = true) {
                 sortOrder,
                 perPage: 100,
                 page: 2,
-            })
+            }),
     )
     data = await data.json()
     data.forEach((item) => {
@@ -175,9 +179,10 @@ export async function get_cities_by_aqi(get_cleanest = true) {
         })
     })
 
-    cached_data.set(
+    await redis.set(
         get_cleanest ? "most_cleanest_cities" : "most_polluted_cities",
-        res
+        res,
+        { ex: cache_exp_ranking },
     )
 
     return res

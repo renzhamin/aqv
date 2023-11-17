@@ -5,7 +5,7 @@ import { get_country_info } from "../data/helpers.js"
 
 const router = express.Router()
 
-router.use("/health", async (req, res) => {
+router.use("/health", async (_, res) => {
     return res.sendStatus(200)
 })
 

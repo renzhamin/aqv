@@ -4,33 +4,63 @@ import router from "./routes/index.js"
 import "dotenv/config"
 import path from "path"
 import { fileURLToPath } from "url"
+import { Ratelimit } from "@upstash/ratelimit"
+import { redis } from "./data/cache.js"
 const __filename = fileURLToPath(import.meta.url)
-
 const __dirname = path.dirname(__filename)
-
-import { rateLimit } from "express-rate-limit"
-const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 5 minutes
-    max: 500, // Limit each IP to 500 requests per `window` (here, per 5 minutes)
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-})
 
 const app = express()
 
-app.use(limiter)
-
-app.use(
-    cors({
-        origin: true,
-        credentials: true,
-    })
-)
-
+if (process.env.NODE_ENV === "development")
+    app.use(cors({ origin: true, credentials: true }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-
 app.use(express.static(path.join(__dirname, "build")))
+
+let req_per_day = Number(process.env.REQ_PER_DAY)
+
+if (isNaN(req_per_day) || req_per_day > 500) req_per_day = 150
+
+export const ratelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(req_per_day, "1 d"),
+    analytics: true,
+    ephemeralCache: new Map(),
+})
+
+app.use(async (req, res, next) => {
+    try {
+        const limiter_id = req.ip
+        const { success, limit, reset, remaining } =
+            await ratelimit.limit(limiter_id)
+        res.set({
+            "X-RateLimit-Limit": limit.toString(),
+            "X-RateLimit-Remaining": remaining.toString(),
+            "X-RateLimit-Reset": reset.toString(),
+        })
+
+        if (limit <= 0) {
+            return res.status(503).json({
+                message: "Redis cache quota exceeded. Contact Admin",
+            })
+        }
+
+        const time_to_reset = Math.max(30, ~~((reset - Date.now()) / 1000))
+        if (!success) {
+            res.set(
+                "cache-control",
+                `private, max-age=${time_to_reset.toString()}, immutable`,
+            )
+            return res.status(429).json({ reset })
+        }
+
+        return next()
+    } catch (err) {
+        return res.status(503).json({
+            message: "Redis cache quota exceeded (maybe). Contact Admin",
+        })
+    }
+})
 
 app.use(router)
 
