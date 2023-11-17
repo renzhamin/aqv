@@ -7,6 +7,11 @@ import {
     redis,
 } from "./cache.js"
 import "dotenv/config"
+import path from "path"
+import { fileURLToPath } from "url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const apiKey = process.env.API_KEY
 
@@ -92,12 +97,7 @@ function getValue(data) {
 }
 
 function get_lat_lng() {
-    let s = ""
-    try {
-        s = fs.readFileSync("./src/data/cord", "utf-8")
-    } catch {
-        s = fs.readFileSync("backend/src/data/cord", "utf-8")
-    }
+    const s = fs.readFileSync(path.resolve(__dirname, "cord"), "utf-8")
     const city_cord = new Map()
     if (!s) return city_cord
     const lines = s.split("\n")
